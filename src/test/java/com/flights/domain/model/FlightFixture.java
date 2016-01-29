@@ -1,28 +1,20 @@
 package com.flights.domain.model;
 
-import java.util.Date;
+import com.flights.repository.provider.FlightProviderFixture;
 
 public class FlightFixture
 {
-  private static Date date = null;
-  public static final Flight U2_CPH_LHR = create("CPH", "LHR", 152.0, "U23631");
-  public static final Flight BA_CPH_LHR = create("CPH", "LHR", 138.0, "BA7710");
+  public static final Flight LHR_IST_TK_15DAYS = createFlightFinal(FlightProviderFixture.LHR_IST_TK_15DAYS, 806.0);
+  public static final Flight LHR_IST_LH_15DAYS = createFlightFinal(FlightProviderFixture.LHR_IST_LH_15DAYS, 481.192);
 
-  private static Flight create(String origin,
-                               String destination,
+  public static final Flight BCN_MAD_U2_2DAYS = createFlightFinal(FlightProviderFixture.BCN_MAD_U2_2DAYS,
+                                                                  909.0899999999999);
+  public static final Flight BCN_MAD_BA_2DAYS = createFlightFinal(FlightProviderFixture.BCN_MAD_BA_2DAYS,
+                                                                  1028.4299999999998);
 
-                               Double priceBase,
-                               String flightCode)
+  private static Flight createFlightFinal(Flight flight, Double totalPrice)
   {
-    Route route = new Route(origin, destination);
-    Flight flight = new Flight();
-    // date.setSeconds(0);
-    // date.setMinutes(0);
-    // date.setHours(0);
-    flight.setDepartureDate(date);
-    flight.setFlightCode(flightCode);
-    flight.setPriceBase(priceBase);
-    flight.setRoute(route);
+    flight.setTotalPrice(totalPrice);
     return flight;
   }
 }

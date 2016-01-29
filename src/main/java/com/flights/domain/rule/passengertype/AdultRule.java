@@ -1,6 +1,6 @@
 package com.flights.domain.rule.passengertype;
 
-public class AdultRule implements PassengerTypeRule
+class AdultRule implements PassengerTypeRule
 {
   public Double calculatePrice(Double basePrice, Integer adultsNumber)
   {

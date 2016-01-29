@@ -6,7 +6,12 @@ import com.flights.domain.ports.secondary.ProviderRepository;
 
 public class SearchFlightAdapter implements ProviderRepository
 {
-  private ProviderFinder providerFinder = new ProviderFinder();
+  private ProviderFinder providerFinder;
+
+  public SearchFlightAdapter(ProviderFinder providerFinder)
+  {
+    this.providerFinder = providerFinder;
+  }
 
   public Flights search(SearchCriteria criteria)
   {

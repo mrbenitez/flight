@@ -1,6 +1,6 @@
 package com.flights.domain.rule.passengertype;
 
-public class ChildRule implements PassengerTypeRule
+class ChildRule implements PassengerTypeRule
 {
   private static final Double DISCOUNT = 0.33;
 

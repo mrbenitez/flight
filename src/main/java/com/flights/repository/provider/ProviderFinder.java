@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import com.flights.domain.model.Airline;
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.Flights;
 import com.flights.domain.model.Route;
@@ -42,7 +43,6 @@ public class ProviderFinder
             {
               Flight flight = createFlight(criteria, flightCode, priceBase, route);
               flights.add(flight);
-              System.out.println(flight);
             }
           }
         }
@@ -62,7 +62,13 @@ public class ProviderFinder
     Flight flight = new Flight();
     flight.setRoute(route);
     flight.setFlightCode(flightCode);
-    flight.setPriceBase(Double.valueOf(priceBase.trim()));
+    flight.setBasePrice(Double.valueOf(priceBase.trim()));
+
+    String airlineCode = flightCode.substring(0, 2);
+    Airline airline = Airline.getAirline(airlineCode);
+    flight.setAirline(airline.getName());
+    Double infantPrice = InfantPriceFinder.obtainPrice(airline);
+    flight.setInfantPrice(infantPrice);
     flight.setDepartureDate(criteria.getDepartureDate());
     return flight;
   }

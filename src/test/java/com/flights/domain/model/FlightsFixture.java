@@ -1,14 +1,16 @@
 package com.flights.domain.model;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+
 import java.util.List;
 
 public class FlightsFixture
 {
-  public static final Flights FLIGHTS_CPH_LHR_2AD = create(Arrays.asList(FlightFixture.U2_CPH_LHR,
-                                                                         FlightFixture.BA_CPH_LHR));
+  public static final Flights LHR_IST_2AD_1CH_1IN_15_DAYS = create(asList(FlightFixture.LHR_IST_TK_15DAYS,
+                                                                          FlightFixture.LHR_IST_LH_15DAYS));
 
-  public static final Flights FLIGHTS_ROUTE_NOTE_EXIST_2AD = new Flights();
+  public static final Flights BCN_MAD_WITH_1AD_2CH_2DAYS = create(asList(FlightFixture.BCN_MAD_U2_2DAYS,
+                                                                         FlightFixture.BCN_MAD_BA_2DAYS));
 
   private static Flights create(List<Flight> flight)
   {

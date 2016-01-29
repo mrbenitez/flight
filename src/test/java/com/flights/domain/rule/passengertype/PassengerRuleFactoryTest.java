@@ -12,10 +12,26 @@ public class PassengerRuleFactoryTest
   private PassengerTypeRuleFactory factory = new PassengerTypeRuleFactory();
 
   @Test
-  public void getAdultsRule()
+  public void getAdultRule()
   {
-    PassengerTypeRule adultRule = factory.get(PassangerType.ADULT);
+    PassengerTypeRule rule = factory.get(PassangerType.ADULT);
 
-    assertThat("The flight is equals", adultRule, instanceOf(AdultRule.class));
+    assertThat("The flight is equals", rule, instanceOf(AdultRule.class));
+  }
+
+  @Test
+  public void getChildRule()
+  {
+    PassengerTypeRule rule = factory.get(PassangerType.CHILD);
+
+    assertThat("The flight is equals", rule, instanceOf(ChildRule.class));
+  }
+
+  @Test
+  public void getInfantRule()
+  {
+    PassengerTypeRule rule = factory.get(PassangerType.INFANT);
+
+    assertThat("The flight is equals", rule, instanceOf(InfantRule.class));
   }
 }

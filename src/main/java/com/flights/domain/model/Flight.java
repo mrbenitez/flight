@@ -6,18 +6,11 @@ public class Flight
 {
   private Route route;
   private Date departureDate;
-  private Double priceBase;
   private String flightCode;
-
-  public String getFlightCode()
-  {
-    return flightCode;
-  }
-
-  public void setFlightCode(String flightCode)
-  {
-    this.flightCode = flightCode;
-  }
+  private Double basePrice;
+  private Double infantPrice;
+  private Double totalPrice;
+  private String airline;
 
   public Route getRoute()
   {
@@ -39,21 +32,62 @@ public class Flight
     this.departureDate = departureDate;
   }
 
-  public Double getPriceBase()
+  public String getFlightCode()
   {
-    return priceBase;
+    return flightCode;
   }
 
-  public void setPriceBase(Double priceBase)
+  public void setFlightCode(String flightCode)
   {
-    this.priceBase = priceBase;
+    this.flightCode = flightCode;
+  }
+
+  public Double getBasePrice()
+  {
+    return basePrice;
+  }
+
+  public void setBasePrice(Double basePrice)
+  {
+    this.basePrice = basePrice;
+  }
+
+  public Double getInfantPrice()
+  {
+    return infantPrice;
+  }
+
+  public void setInfantPrice(Double infantPrice)
+  {
+    this.infantPrice = infantPrice;
+  }
+
+  public String getAirline()
+  {
+    return airline;
+  }
+
+  public void setAirline(String airline)
+  {
+    this.airline = airline;
+  }
+
+  public Double getTotalPrice()
+  {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(Double totalPrice)
+  {
+    this.totalPrice = totalPrice;
   }
 
   @Override
   public String toString()
   {
-    return "Flight [route=" + route + ", departureDate=" + departureDate + ", priceBase=" + priceBase
-        + ", flightCode=" + flightCode + "]";
+    return "Flight [route=" + route + ", departureDate=" + departureDate + ", flightCode=" + flightCode
+        + ", basePrice=" + basePrice + ", infantPrice=" + infantPrice + ", totalPrice=" + totalPrice
+        + ", airline=" + airline + "]";
   }
 
   @Override
@@ -61,10 +95,13 @@ public class Flight
   {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((airline == null) ? 0 : airline.hashCode());
+    result = prime * result + ((basePrice == null) ? 0 : basePrice.hashCode());
     result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
     result = prime * result + ((flightCode == null) ? 0 : flightCode.hashCode());
-    result = prime * result + ((priceBase == null) ? 0 : priceBase.hashCode());
+    result = prime * result + ((infantPrice == null) ? 0 : infantPrice.hashCode());
     result = prime * result + ((route == null) ? 0 : route.hashCode());
+    result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
     return result;
   }
 
@@ -84,6 +121,28 @@ public class Flight
       return false;
     }
     Flight other = (Flight) obj;
+    if (airline == null)
+    {
+      if (other.airline != null)
+      {
+        return false;
+      }
+    }
+    else if (!airline.equals(other.airline))
+    {
+      return false;
+    }
+    if (basePrice == null)
+    {
+      if (other.basePrice != null)
+      {
+        return false;
+      }
+    }
+    else if (!basePrice.equals(other.basePrice))
+    {
+      return false;
+    }
     if (departureDate == null)
     {
       if (other.departureDate != null)
@@ -106,14 +165,14 @@ public class Flight
     {
       return false;
     }
-    if (priceBase == null)
+    if (infantPrice == null)
     {
-      if (other.priceBase != null)
+      if (other.infantPrice != null)
       {
         return false;
       }
     }
-    else if (!priceBase.equals(other.priceBase))
+    else if (!infantPrice.equals(other.infantPrice))
     {
       return false;
     }
@@ -128,7 +187,17 @@ public class Flight
     {
       return false;
     }
+    if (totalPrice == null)
+    {
+      if (other.totalPrice != null)
+      {
+        return false;
+      }
+    }
+    else if (!totalPrice.equals(other.totalPrice))
+    {
+      return false;
+    }
     return true;
   }
-
 }
