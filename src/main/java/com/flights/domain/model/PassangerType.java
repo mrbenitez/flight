@@ -1,4 +1,4 @@
-package com.flights.domain;
+package com.flights.domain.model;
 
 public enum PassangerType {
     ADULT,CHILD,INFANT;

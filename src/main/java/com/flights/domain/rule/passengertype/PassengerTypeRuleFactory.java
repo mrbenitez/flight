@@ -3,20 +3,27 @@ package com.flights.domain.rule.passengertype;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.flights.domain.PassangerType;
 import com.flights.domain.exception.PassengerTypeException;
+import com.flights.domain.model.PassangerType;
 
 public class PassengerTypeRuleFactory
 {
-  private static final Map<PassangerType, PassengerTypeRule> RULE = new HashMap<PassangerType, PassengerTypeRule>();
+  private Map<PassangerType, PassengerTypeRule> rules = new HashMap<PassangerType, PassengerTypeRule>();
 
-  public PassengerTypeRule obtain(PassangerType passangerType)
+  public PassengerTypeRuleFactory()
   {
-    if (!RULE.containsKey(passangerType))
+    rules.put(PassangerType.ADULT, new AdultRule());
+    rules.put(PassangerType.CHILD, new ChildRule());
+    rules.put(PassangerType.INFANT, new InfantRule());
+  }
+
+  public PassengerTypeRule get(PassangerType passangerType)
+  {
+    if (!rules.containsKey(passangerType))
     {
       throw new PassengerTypeException();
     }
 
-    return RULE.get(passangerType);
+    return rules.get(passangerType);
   }
 }

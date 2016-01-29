@@ -8,8 +8,9 @@
 	<properties>
 		<!-- testing -->
 		<junit.version>4.12</junit.version>
-		<mockito.version>1.9.5</mockito.version>		
+		<mockito.version>1.9.5</mockito.version>
 		<hamcrest.version>1.3</hamcrest.version>
+		<jdk.version>1.8</jdk.version>
 	</properties>
 
 
@@ -41,9 +42,27 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<source />
-					<target />
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>1.0-beta-1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>native2ascii</goal>
+						</goals>
+						<configuration>
+							<encoding>UTF8</encoding>
+							<src>src/main/resources</src>
+							<dest>target/classes</dest>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

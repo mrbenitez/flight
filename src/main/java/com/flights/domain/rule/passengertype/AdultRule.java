@@ -1,11 +1,9 @@
 package com.flights.domain.rule.passengertype;
 
-import java.math.BigDecimal;
-
 public class AdultRule implements PassengerTypeRule
 {
-  public BigDecimal calculatePrice(BigDecimal basePrice, Integer numberPassenger)
+  public Double calculatePrice(Double basePrice, Integer adultsNumber)
   {
-    return basePrice.multiply(new BigDecimal(numberPassenger));
+    return basePrice * adultsNumber;
   }
 }

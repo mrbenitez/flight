@@ -1,13 +1,18 @@
 package com.flights.domain.rule.passengertype;
 
-import java.math.BigDecimal;
-
 public class ChildRule implements PassengerTypeRule
 {
-  private static final Double DISCOUNT = 0.2;
+  private static final Double DISCOUNT = 0.33;
 
-  public BigDecimal calculatePrice(BigDecimal basePrice, Integer numberPassenger)
+  public Double calculatePrice(Double basePrice, Integer childrenNumber)
   {
-    return basePrice.multiply(new BigDecimal(numberPassenger)).multiply(new BigDecimal(DISCOUNT));
+    Double base = calculatePriceBaseByAllPassengers(basePrice, childrenNumber);
+
+    return calculatePriceWithDisocunt(base);
+  }
+
+  private Double calculatePriceWithDisocunt(Double base)
+  {
+    return base * (1 - DISCOUNT);
   }
 }
