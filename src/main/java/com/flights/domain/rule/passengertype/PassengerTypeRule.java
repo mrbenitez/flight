@@ -1,10 +1,10 @@
 package com.flights.domain.rule.passengertype;
 
-public interface PassengerTypeRule
+public abstract class PassengerTypeRule
 {
-  Double calculatePrice(Double basePrice, Integer passengersNumber);
+  public abstract Double calculatePrice(Double basePrice, Integer passengersNumber);
 
-  default Double calculatePriceAllPassengers(Double basePrice, Integer passengerNumber)
+  protected Double calculateDefault(Double basePrice, Integer passengerNumber)
   {
     return basePrice * passengerNumber;
   }

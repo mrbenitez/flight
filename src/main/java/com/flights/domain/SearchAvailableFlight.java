@@ -1,5 +1,7 @@
 package com.flights.domain;
 
+import java.util.Map;
+
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.Flights;
 import com.flights.domain.model.PassangerType;
@@ -15,7 +17,8 @@ public class SearchAvailableFlight
   private PassengerTypeRuleFactory passengerTypeRuleFactory;
   private DestinationDateRule destinationDateRule;
 
-  public SearchAvailableFlight(SearchFlightAdapter searchFlightAdapter, PassengerTypeRuleFactory passengerTypeRuleFactory,
+  public SearchAvailableFlight(SearchFlightAdapter searchFlightAdapter,
+      PassengerTypeRuleFactory passengerTypeRuleFactory,
       DestinationDateRule destinationDateRule)
   {
     this.searchFlightAdapter = searchFlightAdapter;
@@ -26,9 +29,7 @@ public class SearchAvailableFlight
   public Flights execute(SearchCriteria criteria)
   {
     Flights flights = searchFlightAdapter.search(criteria);
-
     fillTotalPrice(criteria, flights);
-
     return flights;
   }
 
@@ -36,36 +37,51 @@ public class SearchAvailableFlight
   {
     for (Flight flight : flights.getFlights())
     {
-      Double totalPrice = 0.0;
       Double departureDatePrice = destinationDateRule.calculatePrice(criteria.getDepartureDate(),
                                                                      flight.getBasePrice());
 
-      totalPrice = calculatePriceByAllPassenger(criteria, flight, totalPrice, departureDatePrice);
+      Double totalPrice = calculateTotalPriceByAllPassenger(criteria.getPassenger(),
+                                                            flight,
+                                                            departureDatePrice);
 
       flight.setTotalPrice(totalPrice);// TODO VER SI USAR OTRO OBJETO price para no devolver ni usar double
     }
   }
 
-  private Double calculatePriceByAllPassenger(SearchCriteria criteria,
-                                              Flight flight,
-                                              Double totalPrice,
-                                              Double departureDatePrice)
+  private Double calculateTotalPriceByAllPassenger(Map<PassangerType, Integer> passenger,
+                                                   Flight flight,
+                                                   Double departureDatePrice)
   {
-    PassengerTypeRule passengerTypeRule;
-    for (PassangerType passangerType : criteria.getPassenger().keySet())
+    Double totalPrice = 0.0;
+    for (PassangerType passangerType : passenger.keySet())
     {
-      passengerTypeRule = passengerTypeRuleFactory.get(passangerType);
-      int numPassenger = criteria.getPassenger().get(passangerType);
+      PassengerTypeRule passengerTypeRule = passengerTypeRuleFactory.get(passangerType);
+      int numPassenger = extracted(passenger, passangerType);
 
-      if (PassangerType.INFANT.equals(passangerType))
-      {
-        totalPrice += passengerTypeRule.calculatePrice(flight.getInfantPrice(), numPassenger);
-      }
-      else
-      {
-        totalPrice += passengerTypeRule.calculatePrice(departureDatePrice, numPassenger);
-      }
+      Double basePrice = calculateBasePrice(flight, departureDatePrice, passangerType);
+      totalPrice += passengerTypeRule.calculatePrice(basePrice, numPassenger);
     }
     return totalPrice;
+  }
+
+  private Integer extracted(Map<PassangerType, Integer> passenger, PassangerType passangerType)
+  {
+    return passenger.get(passangerType);
+  }
+
+  private Double calculateBasePrice(Flight flight, Double departureDatePrice, PassangerType passangerType)
+  {
+    Double basePrice = departureDatePrice;
+    basePrice = basePriceWhenIsInfant(flight, passangerType, basePrice);
+    return basePrice;
+  }
+
+  private Double basePriceWhenIsInfant(Flight flight, PassangerType passangerType, Double basePrice)
+  {
+    if (PassangerType.INFANT.equals(passangerType))
+    {
+      basePrice = flight.getInfantPrice();
+    }
+    return basePrice;
   }
 }

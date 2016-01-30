@@ -1,9 +1,9 @@
 package com.flights.domain.rule.passengertype;
 
-public class InfantRule implements PassengerTypeRule
+public class InfantRule extends PassengerTypeRule
 {
   public Double calculatePrice(Double basePrice, Integer infantsNumber)
   {
-    return calculatePriceAllPassengers(basePrice, infantsNumber);
+    return calculateDefault(basePrice, infantsNumber);
   }
 }

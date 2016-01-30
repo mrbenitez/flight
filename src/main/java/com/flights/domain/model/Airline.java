@@ -11,7 +11,7 @@ public enum Airline
   private String code;
   private String name;
 
-  private Airline(String name, String code)
+  private Airline(String code, String name)
   {
     this.name = name;
     this.code = code;
@@ -36,7 +36,7 @@ public enum Airline
   {
     for (Airline airline : Airline.values())
     {
-      AIRLINE_MAP.put(airline.getName(), airline);
+      AIRLINE_MAP.put(airline.getCode(), airline);
     }
   }
 }
