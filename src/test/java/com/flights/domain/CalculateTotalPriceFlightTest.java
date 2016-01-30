@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.flights.domain.model.FlightFixture;
-import com.flights.domain.model.PassangerType;
+import com.flights.domain.model.PassengerType;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
@@ -21,7 +21,6 @@ import com.flights.domain.rule.passengertype.AdultRule;
 import com.flights.domain.rule.passengertype.ChildRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
-import com.flights.repository.provider.FlightProviderFixture;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CalculateTotalPriceFlightTest
@@ -39,15 +38,17 @@ public class CalculateTotalPriceFlightTest
     SearchCriteria criteria = SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS;
     inizializeDestinationDateRule(criteria.getDepartureDate(), 259.0, 388.5);
     inizializeDestinationDateRule(criteria.getDepartureDate(), 293.0, 439.5);
-    inicializePassengerTypeRuleFactory(PassangerType.ADULT, new AdultRule());
-    inicializePassengerTypeRuleFactory(PassangerType.CHILD, new ChildRule());
+    inicializePassengerTypeRuleFactory(PassengerType.ADULT, new AdultRule());
+    inicializePassengerTypeRuleFactory(PassengerType.CHILD, new ChildRule());
 
-    Double totalPrice = calculateTotalPriceFlight.calculate(criteria, FlightProviderFixture.BCN_MAD_BA_2DAYS);
+    Double totalPrice = calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_LH_2DAYS);
 
-    assertThat("The flights are equals", totalPrice, equalTo(FlightFixture.BCN_MAD_BA_2DAYS.getTotalPrice()));
+    assertThat("The flights are equals",
+               totalPrice,
+               equalTo(FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS.getTotalPrice()));
   }
 
-  private void inicializePassengerTypeRuleFactory(PassangerType passangerType, PassengerTypeRule rule)
+  private void inicializePassengerTypeRuleFactory(PassengerType passangerType, PassengerTypeRule rule)
   {
     when(passengerTypeRuleFactory.get(passangerType)).thenReturn(rule);
   }

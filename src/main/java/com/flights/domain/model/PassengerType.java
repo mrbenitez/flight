@@ -1,5 +1,5 @@
 package com.flights.domain.model;
 
-public enum PassangerType {
+public enum PassengerType {
     ADULT,CHILD,INFANT;
 }

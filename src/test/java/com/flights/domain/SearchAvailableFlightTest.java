@@ -41,9 +41,9 @@ public class SearchAvailableFlightTest
   public void inicialize()
   {
     when(searchFlightAdapter.search(criteria)).thenReturn(FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
-    when(calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_BA_2DAYS))
-        .thenReturn(FlightFixture.BCN_MAD_BA_2DAYS.getTotalPrice());
-    when(calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_U2_2DAYS))
-        .thenReturn(FlightFixture.BCN_MAD_U2_2DAYS.getTotalPrice());
+    when(calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS))
+        .thenReturn(FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS.getTotalPrice());
+    when(calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS))
+        .thenReturn(FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS.getTotalPrice());
   }
 }

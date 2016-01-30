@@ -3,7 +3,8 @@ package com.flights.domain;
 import java.util.Map;
 
 import com.flights.domain.model.Flight;
-import com.flights.domain.model.PassangerType;
+import com.flights.domain.model.PassengerType;
+import com.flights.domain.model.Passengers;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
@@ -31,44 +32,44 @@ public class CalculateTotalPriceFlight
                                              departureDatePrice);
   }
 
-  private Double calculateTotalPriceByAllPassenger(Map<PassangerType, Integer> passenger,
+  private Double calculateTotalPriceByAllPassenger(Passengers passenger,
                                                    Flight flight,
                                                    Double departureDatePrice)
   {
     Double totalPrice = 0.0;
-    for (PassangerType passangerType : passenger.keySet())
+    for (PassengerType passangerType : passenger.get().keySet())
     {
-      PassengerTypeRule passengerTypeRule = obtainPassengerTypeRule(passangerType);
-      int numPassenger = obtainNumberPassenger(passenger, passangerType);
+      int numPassenger = obtainNumberPassenger(passenger.get(), passangerType);
       Double basePrice = calculateBasePrice(flight, departureDatePrice, passangerType);
+      PassengerTypeRule passengerTypeRule = obtainPassengerTypeRule(passangerType);
       totalPrice += passengerTypeRule.calculatePrice(basePrice, numPassenger);
     }
     return totalPrice;
   }
 
-  private PassengerTypeRule obtainPassengerTypeRule(PassangerType passangerType)
-  {
-    return passengerTypeRuleFactory.get(passangerType);
-  }
-
-  private Integer obtainNumberPassenger(Map<PassangerType, Integer> passenger, PassangerType passangerType)
+  private Integer obtainNumberPassenger(Map<PassengerType, Integer> passenger, PassengerType passangerType)
   {
     return passenger.get(passangerType);
   }
 
-  private Double calculateBasePrice(Flight flight, Double departureDatePrice, PassangerType passangerType)
+  private Double calculateBasePrice(Flight flight, Double departureDatePrice, PassengerType passangerType)
   {
     Double basePrice = departureDatePrice;
     basePrice = basePriceWhenIsInfant(flight, passangerType, basePrice);
     return basePrice;
   }
 
-  private Double basePriceWhenIsInfant(Flight flight, PassangerType passangerType, Double basePrice)
+  private Double basePriceWhenIsInfant(Flight flight, PassengerType passangerType, Double basePrice)
   {
-    if (PassangerType.INFANT.equals(passangerType))
+    if (PassengerType.INFANT.equals(passangerType))
     {
       basePrice = flight.getInfantPrice();
     }
     return basePrice;
+  }
+
+  private PassengerTypeRule obtainPassengerTypeRule(PassengerType passangerType)
+  {
+    return passengerTypeRuleFactory.get(passangerType);
   }
 }

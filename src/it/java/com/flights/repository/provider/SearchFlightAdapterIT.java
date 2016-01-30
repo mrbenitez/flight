@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import com.flights.domain.model.Flights;
+import com.flights.domain.model.FlightsFixture;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 
@@ -20,6 +21,6 @@ public class SearchFlightAdapterIT
 
     Flights flights = searchFlightAdapter.search(criteria);
 
-    assertThat("The flights are equals", flights, equalTo(FlightsProviderFixture.CPH_LHR_2AD_2DAYS));
+    assertThat("The flights are equals", flights, equalTo(FlightsFixture.CPH_LHR_2AD_5DAYS));
   }
 }

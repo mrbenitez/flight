@@ -2,21 +2,21 @@ package com.flights.domain.model;
 
 public class Route
 {
-  private String origin;
-  private String destination;
+  private Airport origin;
+  private Airport destination;
 
-  public Route(String origin, String destination)
+  public Route(Airport origin, Airport destination)
   {
     this.origin = origin;
     this.destination = destination;
   }
 
-  public String getOrigin()
+  public Airport getOrigin()
   {
     return origin;
   }
 
-  public String getDestination()
+  public Airport getDestination()
   {
     return destination;
   }
@@ -53,25 +53,11 @@ public class Route
       return false;
     }
     Route other = (Route) obj;
-    if (destination == null)
-    {
-      if (other.destination != null)
-      {
-        return false;
-      }
-    }
-    else if (!destination.equals(other.destination))
+    if (destination != other.destination)
     {
       return false;
     }
-    if (origin == null)
-    {
-      if (other.origin != null)
-      {
-        return false;
-      }
-    }
-    else if (!origin.equals(other.origin))
+    if (origin != other.origin)
     {
       return false;
     }

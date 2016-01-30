@@ -36,7 +36,7 @@ public class SearchAvailableFlightIT
   {
     Flights flights = search.execute(SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
 
-    verify(flights, FlightsFixture.LHR_IST_2AD_1CH_1IN_15_DAYS);
+    verify(flights, FlightsFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
   }
 
   private void verify(Flights flights, Flights flightsExpected)

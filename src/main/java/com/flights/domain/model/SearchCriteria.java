@@ -1,21 +1,19 @@
 package com.flights.domain.model;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SearchCriteria
 {
   private Route route;
   private Date departureDate;
-  private Map<PassangerType, Integer> passenger = new HashMap<PassangerType, Integer>();
+  private Passengers passengers;
 
-  public SearchCriteria(Route route, Date departureDate, Map<PassangerType, Integer> passenger)
+  public SearchCriteria(Route route, Date departureDate, Passengers passengers)
   {
     super();
     this.route = route;
     this.departureDate = departureDate;
-    this.passenger = passenger;
+    this.passengers = passengers;
   }
 
   public Route getRoute()
@@ -28,8 +26,8 @@ public class SearchCriteria
     return departureDate;
   }
 
-  public Map<PassangerType, Integer> getPassenger()
+  public Passengers getPassenger()
   {
-    return passenger;
+    return passengers;
   }
 }

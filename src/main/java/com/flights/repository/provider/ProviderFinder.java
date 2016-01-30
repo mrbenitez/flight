@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import com.flights.domain.model.Airline;
+import com.flights.domain.model.Airport;
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.Flights;
 import com.flights.domain.model.Route;
@@ -38,7 +39,7 @@ public class ProviderFinder
             String flightCode = st.nextToken();
             String priceBase = st.nextToken();
 
-            Route route = new Route(origin, destination);
+            Route route = new Route(Airport.getAirport(origin), Airport.getAirport(destination));
             if (route.equals(criteria.getRoute()))
             {
               Flight flight = createFlight(criteria, flightCode, priceBase, route);
@@ -59,31 +60,29 @@ public class ProviderFinder
 
   private Flight createFlight(SearchCriteria criteria, String flightCode, String priceBase, Route route)
   {
-    Flight flight = new Flight();
-    flight.setRoute(route);
-    flight.setFlightCode(flightCode);
-    flight.setBasePrice(Double.valueOf(priceBase.trim()));
-
+    Double basePrice = Double.valueOf(priceBase.trim());
     String airlineCode = flightCode.substring(0, 2);
     Airline airline = Airline.getAirline(airlineCode);
-    flight.setAirline(airline.getName());
     Double infantPrice = InfantPriceFinder.obtainPrice(airline);
-    flight.setInfantPrice(infantPrice);
-    flight.setDepartureDate(criteria.getDepartureDate());
-    return flight;
+    Flight.Builder builder = new Flight.Builder(route, criteria.getDepartureDate(), flightCode, basePrice,
+        infantPrice, airline.getName());
+    return builder.build();
   }
 
-  // Map<Route, Flight> mapFlights = new HashMap<Route, Flight>();
+  // Map<Route, ProviderFlight> mapProviderFlight = new HashMap<Route, ProviderFlight>();
   //
-  // public Flights search(SearchCriteria criteria)
+  // private List<ProviderFlight> finder(SearchCriteria criteria)
   // {
-  // Flights flights = new Flights();
-  //
-  // if (mapFlights.containsKey(criteria.getRoute()))
+  // List<ProviderFlight> providerFlights = new ArrayList<>();
+  // if (mapProviderFlight.containsKey(criteria.getRoute()))
   // {
-  // flights.add(mapFlights.get(criteria.getRoute()));
+  // providerFlights.add(mapProviderFlight.get(criteria.getRoute()));
+  // }
+  // return providerFlights;
   // }
   //
-  // return flights;
+  // public ProviderFinder()
+  // {
+  // mapProviderFlight.put(key, value);
   // }
 }

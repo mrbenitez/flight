@@ -19,9 +19,14 @@ public class SearchAvailableFlight
 
   public Flights execute(SearchCriteria criteria)
   {
-    Flights flights = searchFlightAdapter.search(criteria);
+    Flights flights = searchFlights(criteria);
     fillTotalPrice(criteria, flights);
     return flights;
+  }
+
+  private Flights searchFlights(SearchCriteria criteria)
+  {
+    return searchFlightAdapter.search(criteria);
   }
 
   private void fillTotalPrice(SearchCriteria criteria, Flights flights)

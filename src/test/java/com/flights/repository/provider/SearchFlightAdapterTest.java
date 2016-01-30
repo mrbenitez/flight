@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.flights.domain.model.FlightsFixture;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 
@@ -24,7 +25,7 @@ public class SearchFlightAdapterTest
   public void search()
   {
     SearchCriteria criteria = SearchCriteriaFixture.CPH_LHR_WITH_2AD_5DAYS;
-    when(providerFinder.execute(criteria)).thenReturn(FlightsProviderFixture.CPH_LHR_2AD_2DAYS);
+    when(providerFinder.execute(criteria)).thenReturn(FlightsFixture.CPH_LHR_2AD_5DAYS);
 
     searchFlightAdapter.search(criteria);
 

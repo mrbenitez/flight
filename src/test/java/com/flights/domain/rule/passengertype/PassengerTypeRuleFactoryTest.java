@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.flights.domain.model.PassangerType;
+import com.flights.domain.model.PassengerType;
 
 public class PassengerTypeRuleFactoryTest
 {
@@ -14,7 +14,7 @@ public class PassengerTypeRuleFactoryTest
   @Test
   public void getAdultRule()
   {
-    PassengerTypeRule rule = factory.get(PassangerType.ADULT);
+    PassengerTypeRule rule = factory.get(PassengerType.ADULT);
 
     assertThat("The rule is equals", rule, instanceOf(AdultRule.class));
   }
@@ -22,7 +22,7 @@ public class PassengerTypeRuleFactoryTest
   @Test
   public void getChildRule()
   {
-    PassengerTypeRule rule = factory.get(PassangerType.CHILD);
+    PassengerTypeRule rule = factory.get(PassengerType.CHILD);
 
     assertThat("The rule is equals", rule, instanceOf(ChildRule.class));
   }
@@ -30,7 +30,7 @@ public class PassengerTypeRuleFactoryTest
   @Test
   public void getInfantRule()
   {
-    PassengerTypeRule rule = factory.get(PassangerType.INFANT);
+    PassengerTypeRule rule = factory.get(PassengerType.INFANT);
 
     assertThat("The rule is equals", rule, instanceOf(InfantRule.class));
   }

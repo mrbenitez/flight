@@ -12,63 +12,14 @@ public class Flight
   private Double totalPrice;
   private String airline;
 
-  public Route getRoute()
-  {
-    return route;
-  }
-
-  public void setRoute(Route route)
+  private Flight(Route route, Date departureDate, String flightCode, Double basePrice, Double infantPrice,
+      String airline)
   {
     this.route = route;
-  }
-
-  public Date getDepartureDate()
-  {
-    return departureDate;
-  }
-
-  public void setDepartureDate(Date departureDate)
-  {
     this.departureDate = departureDate;
-  }
-
-  public String getFlightCode()
-  {
-    return flightCode;
-  }
-
-  public void setFlightCode(String flightCode)
-  {
     this.flightCode = flightCode;
-  }
-
-  public Double getBasePrice()
-  {
-    return basePrice;
-  }
-
-  public void setBasePrice(Double basePrice)
-  {
     this.basePrice = basePrice;
-  }
-
-  public Double getInfantPrice()
-  {
-    return infantPrice;
-  }
-
-  public void setInfantPrice(Double infantPrice)
-  {
     this.infantPrice = infantPrice;
-  }
-
-  public String getAirline()
-  {
-    return airline;
-  }
-
-  public void setAirline(String airline)
-  {
     this.airline = airline;
   }
 
@@ -80,6 +31,36 @@ public class Flight
   public void setTotalPrice(Double totalPrice)
   {
     this.totalPrice = totalPrice;
+  }
+
+  public Route getRoute()
+  {
+    return route;
+  }
+
+  public Date getDepartureDate()
+  {
+    return departureDate;
+  }
+
+  public String getFlightCode()
+  {
+    return flightCode;
+  }
+
+  public Double getBasePrice()
+  {
+    return basePrice;
+  }
+
+  public Double getInfantPrice()
+  {
+    return infantPrice;
+  }
+
+  public String getAirline()
+  {
+    return airline;
   }
 
   @Override
@@ -101,7 +82,6 @@ public class Flight
     result = prime * result + ((flightCode == null) ? 0 : flightCode.hashCode());
     result = prime * result + ((infantPrice == null) ? 0 : infantPrice.hashCode());
     result = prime * result + ((route == null) ? 0 : route.hashCode());
-    result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
     return result;
   }
 
@@ -194,10 +174,32 @@ public class Flight
         return false;
       }
     }
-    else if (!totalPrice.equals(other.totalPrice))
-    {
-      return false;
-    }
     return true;
+  }
+
+  public static class Builder
+  {
+    private Route route;
+    private Date departureDate;
+    private String flightCode;
+    private Double basePrice;
+    private Double infantPrice;
+    private String airline;
+
+    public Builder(Route route, Date departureDate, String flightCode, Double basePrice, Double infantPrice,
+        String airline)
+    {
+      this.route = route;
+      this.departureDate = departureDate;
+      this.flightCode = flightCode;
+      this.basePrice = basePrice;
+      this.infantPrice = infantPrice;
+      this.airline = airline;
+    }
+
+    public Flight build()
+    {
+      return new Flight(route, departureDate, flightCode, basePrice, infantPrice, airline);
+    }
   }
 }
