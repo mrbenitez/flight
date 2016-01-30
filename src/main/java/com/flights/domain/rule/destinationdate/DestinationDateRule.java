@@ -8,7 +8,6 @@ import com.flights.DateUtil;
 
 public class DestinationDateRule
 {
-
   public Double calculatePrice(Date destinationDate, Double basePrice)
   {
     Double price = null;

@@ -7,14 +7,21 @@ import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
-import com.flights.repository.provider.ProviderFinder;
 import com.flights.repository.provider.SearchFlightAdapter;
 
 public class Search
 {
-  private SearchFlightAdapter searchFlightAdapter = new SearchFlightAdapter(new ProviderFinder());
-  private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
-  private DestinationDateRule destinationDateRule = new DestinationDateRule();
+  private SearchFlightAdapter searchFlightAdapter;
+  private PassengerTypeRuleFactory passengerTypeRuleFactory;
+  private DestinationDateRule destinationDateRule;
+
+  public Search(SearchFlightAdapter searchFlightAdapter, PassengerTypeRuleFactory passengerTypeRuleFactory,
+      DestinationDateRule destinationDateRule)
+  {
+    this.searchFlightAdapter = searchFlightAdapter;
+    this.passengerTypeRuleFactory = passengerTypeRuleFactory;
+    this.destinationDateRule = destinationDateRule;
+  }
 
   public Flights execute(SearchCriteria criteria)
   {

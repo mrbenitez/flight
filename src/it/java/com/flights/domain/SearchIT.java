@@ -8,10 +8,17 @@ import org.junit.Test;
 import com.flights.domain.model.Flights;
 import com.flights.domain.model.FlightsFixture;
 import com.flights.domain.model.SearchCriteriaFixture;
+import com.flights.domain.rule.destinationdate.DestinationDateRule;
+import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
+import com.flights.repository.provider.ProviderFinder;
+import com.flights.repository.provider.SearchFlightAdapter;
 
 public class SearchIT
 {
-  private Search search = new Search();
+  private SearchFlightAdapter searchFlightAdapter = new SearchFlightAdapter(new ProviderFinder());
+  private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
+  private DestinationDateRule destinationDateRule = new DestinationDateRule();
+  private Search search = new Search(searchFlightAdapter, passengerTypeRuleFactory, destinationDateRule);
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
