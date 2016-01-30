@@ -18,7 +18,10 @@ public class SearchAvailableFlightIT
   private SearchFlightAdapter searchFlightAdapter = new SearchFlightAdapter(new ProviderFinder());
   private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
   private DestinationDateRule destinationDateRule = new DestinationDateRule();
-  private SearchAvailableFlight search = new SearchAvailableFlight(searchFlightAdapter, passengerTypeRuleFactory, destinationDateRule);
+  private CalculateTotalPriceFlight calculateTotalPriceFlight = new CalculateTotalPriceFlight(
+      passengerTypeRuleFactory, destinationDateRule);
+  private SearchAvailableFlight search = new SearchAvailableFlight(searchFlightAdapter,
+      calculateTotalPriceFlight);
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
