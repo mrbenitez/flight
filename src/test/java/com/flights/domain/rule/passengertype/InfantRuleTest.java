@@ -7,13 +7,16 @@ import org.junit.Test;
 
 public class InfantRuleTest
 {
+  private static final double TOTAL_PRICE_EXPECTED = 10.0;
+  private static final int INFANTS_NUMBER = 2;
+  private static final double BASE_PRICE = 5.0;
   private InfantRule infantRule = new InfantRule();
 
   @Test
   public void calculatePriceInfants()
   {
-    Double totalPrice = infantRule.calculatePrice(5.0, 5);
+    Double totalPrice = infantRule.calculatePrice(BASE_PRICE, INFANTS_NUMBER);
 
-    assertThat("The price is equals", totalPrice, equalTo(25.0));
+    assertThat("The price is equals", totalPrice, equalTo(TOTAL_PRICE_EXPECTED));
   }
 }

@@ -13,12 +13,12 @@ import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 import com.flights.repository.provider.ProviderFinder;
 import com.flights.repository.provider.SearchFlightAdapter;
 
-public class SearchIT
+public class SearchAvailableFlightIT
 {
   private SearchFlightAdapter searchFlightAdapter = new SearchFlightAdapter(new ProviderFinder());
   private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
   private DestinationDateRule destinationDateRule = new DestinationDateRule();
-  private Search search = new Search(searchFlightAdapter, passengerTypeRuleFactory, destinationDateRule);
+  private SearchAvailableFlight search = new SearchAvailableFlight(searchFlightAdapter, passengerTypeRuleFactory, destinationDateRule);
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()

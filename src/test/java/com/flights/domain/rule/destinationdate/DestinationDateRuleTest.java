@@ -10,38 +10,43 @@ import org.junit.Test;
 
 public class DestinationDateRuleTest
 {
+  private static final double BASE_PRICE = 100.0;
+  private static final double TOTAL_PRICE_WITH_LESS_3DAYS_ADVANCE = 150.0;
+  private static final double TOTAL_PRICE_WITH_BETWEEN_3_15_DAYS_ADVANCE = 120.0;
+  private static final double TOTAL_PRICE_WITH_BETWEEN_16_30_DAYS_ADVANCE = 100.0;
+  private static final double TOTAL_PRICE_WITH_MORE_30DAYS_ADVANCE = 80.0;
   private DestinationDateRule destinationDateRule = new DestinationDateRule();
 
   @Test
-  public void calculatePriceWith0daysAdvance()
+  public void calculatePriceWithLess3DaysAdvance()
   {
-    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(2), 100.0);
+    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(2), BASE_PRICE);
 
-    assertThat("The price is equals", totalPrice, equalTo(150.0));
+    assertThat("The price is equals", totalPrice, equalTo(TOTAL_PRICE_WITH_LESS_3DAYS_ADVANCE));
   }
 
   @Test
-  public void calculatePriceWith4daysAdvance()
+  public void calculatePriceWithBetween3And15DaysAdvance()
   {
-    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(4), 100.0);
+    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(4), BASE_PRICE);
 
-    assertThat("The price is equals", totalPrice, equalTo(120.0));
+    assertThat("The price is equals", totalPrice, equalTo(TOTAL_PRICE_WITH_BETWEEN_3_15_DAYS_ADVANCE));
   }
 
   @Test
-  public void calculatePriceWith17daysAdvance()
+  public void calculatePriceWithBetween16And30DaysAdvance()
   {
-    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(17), 100.0);
+    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(17), BASE_PRICE);
 
-    assertThat("The price is equals", totalPrice, equalTo(100.0));
+    assertThat("The price is equals", totalPrice, equalTo(TOTAL_PRICE_WITH_BETWEEN_16_30_DAYS_ADVANCE));
   }
 
   @Test
-  public void calculatePriceWith40daysAdvance()
+  public void calculatePriceWithMore30DaysAdvance()
   {
-    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(40), 100.0);
+    Double totalPrice = destinationDateRule.calculatePrice(obtainDateWithDaysAdvance(40), BASE_PRICE);
 
-    assertThat("The price is equals", totalPrice, equalTo(80.0));
+    assertThat("The price is equals", totalPrice, equalTo(TOTAL_PRICE_WITH_MORE_30DAYS_ADVANCE));
   }
 
   private Date obtainDateWithDaysAdvance(int daysAdvance)

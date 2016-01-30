@@ -9,13 +9,13 @@ import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 import com.flights.repository.provider.SearchFlightAdapter;
 
-public class Search
+public class SearchAvailableFlight
 {
   private SearchFlightAdapter searchFlightAdapter;
   private PassengerTypeRuleFactory passengerTypeRuleFactory;
   private DestinationDateRule destinationDateRule;
 
-  public Search(SearchFlightAdapter searchFlightAdapter, PassengerTypeRuleFactory passengerTypeRuleFactory,
+  public SearchAvailableFlight(SearchFlightAdapter searchFlightAdapter, PassengerTypeRuleFactory passengerTypeRuleFactory,
       DestinationDateRule destinationDateRule)
   {
     this.searchFlightAdapter = searchFlightAdapter;
