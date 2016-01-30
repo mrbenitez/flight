@@ -16,7 +16,7 @@ public class SearchIT
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
   {
-    Flights flights = search.search(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
+    Flights flights = search.execute(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
 
     verify(flights, FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
   }
@@ -24,7 +24,7 @@ public class SearchIT
   @Test
   public void searchLhrToIstdWith2Ad1Ch1InAnd15DaysAdvance()
   {
-    Flights flights = search.search(SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
+    Flights flights = search.execute(SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
 
     verify(flights, FlightsFixture.LHR_IST_2AD_1CH_1IN_15_DAYS);
   }

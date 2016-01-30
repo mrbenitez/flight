@@ -16,35 +16,49 @@ public class Search
   private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
   private DestinationDateRule destinationDateRule = new DestinationDateRule();
 
-  public Flights search(SearchCriteria criteria)
+  public Flights execute(SearchCriteria criteria)
   {
     Flights flights = searchFlightAdapter.search(criteria);
-    PassengerTypeRule passengerTypeRule = null;
 
+    fillTotalPrice(criteria, flights);
+
+    return flights;
+  }
+
+  private void fillTotalPrice(SearchCriteria criteria, Flights flights)
+  {
     for (Flight flight : flights.getFlights())
     {
       Double totalPrice = 0.0;
       Double departureDatePrice = destinationDateRule.calculatePrice(criteria.getDepartureDate(),
                                                                      flight.getBasePrice());
 
-      for (PassangerType passangerType : criteria.getPassenger().keySet())
-      {
-        passengerTypeRule = passengerTypeRuleFactory.get(passangerType);
-        int numPassenger = criteria.getPassenger().get(passangerType);
+      totalPrice = calculatePriceByAllPassenger(criteria, flight, totalPrice, departureDatePrice);
 
-        if (PassangerType.INFANT.equals(passangerType))
-        {
-          totalPrice += passengerTypeRule.calculatePrice(flight.getInfantPrice(), numPassenger);
-        }
-        else
-        {
-          totalPrice += passengerTypeRule.calculatePrice(departureDatePrice, numPassenger);
-        }
-      }
-
-      flight.setTotalPrice(totalPrice);// TODO VER SI USAR OTRO OBJETO
+      flight.setTotalPrice(totalPrice);// TODO VER SI USAR OTRO OBJETO price para no devolver ni usar double
     }
+  }
 
-    return flights;
+  private Double calculatePriceByAllPassenger(SearchCriteria criteria,
+                                              Flight flight,
+                                              Double totalPrice,
+                                              Double departureDatePrice)
+  {
+    PassengerTypeRule passengerTypeRule;
+    for (PassangerType passangerType : criteria.getPassenger().keySet())
+    {
+      passengerTypeRule = passengerTypeRuleFactory.get(passangerType);
+      int numPassenger = criteria.getPassenger().get(passangerType);
+
+      if (PassangerType.INFANT.equals(passangerType))
+      {
+        totalPrice += passengerTypeRule.calculatePrice(flight.getInfantPrice(), numPassenger);
+      }
+      else
+      {
+        totalPrice += passengerTypeRule.calculatePrice(departureDatePrice, numPassenger);
+      }
+    }
+    return totalPrice;
   }
 }

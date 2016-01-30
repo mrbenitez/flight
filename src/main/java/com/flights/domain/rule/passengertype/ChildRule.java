@@ -6,7 +6,7 @@ class ChildRule implements PassengerTypeRule
 
   public Double calculatePrice(Double basePrice, Integer childrenNumber)
   {
-    Double base = calculatePriceBaseByAllPassengers(basePrice, childrenNumber);
+    Double base = calculatePriceAllPassengers(basePrice, childrenNumber);
 
     return calculatePriceWithDisocunt(base);
   }

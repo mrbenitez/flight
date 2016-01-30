@@ -3,7 +3,6 @@ package com.flights.domain.rule.passengertype;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.flights.domain.exception.PassengerTypeException;
 import com.flights.domain.model.PassangerType;
 
 public class PassengerTypeRuleFactory
@@ -19,11 +18,6 @@ public class PassengerTypeRuleFactory
 
   public PassengerTypeRule get(PassangerType passangerType)
   {
-    if (!rules.containsKey(passangerType))
-    {
-      throw new PassengerTypeException();
-    }
-
     return rules.get(passangerType);
   }
 }

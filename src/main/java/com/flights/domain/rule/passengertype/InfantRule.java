@@ -4,6 +4,6 @@ class InfantRule implements PassengerTypeRule
 {
   public Double calculatePrice(Double basePrice, Integer infantsNumber)
   {
-    return calculatePriceBaseByAllPassengers(basePrice, infantsNumber);
+    return calculatePriceAllPassengers(basePrice, infantsNumber);
   }
 }

@@ -39,14 +39,14 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native2ascii-maven-plugin</artifactId>
@@ -64,6 +64,58 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- integration tests -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/it/java</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-test-resource</id>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/it/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>			
+			<!-- integration tests -->
+
 		</plugins>
 	</build>
 </project>

@@ -4,7 +4,7 @@ public interface PassengerTypeRule
 {
   Double calculatePrice(Double basePrice, Integer passengersNumber);
 
-  default Double calculatePriceBaseByAllPassengers(Double basePrice, Integer passengerNumber)
+  default Double calculatePriceAllPassengers(Double basePrice, Integer passengerNumber)
   {
     return basePrice * passengerNumber;
   }

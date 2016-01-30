@@ -4,6 +4,6 @@ class AdultRule implements PassengerTypeRule
 {
   public Double calculatePrice(Double basePrice, Integer adultsNumber)
   {
-    return basePrice * adultsNumber;
+    return calculatePriceAllPassengers(basePrice, adultsNumber);
   }
 }
