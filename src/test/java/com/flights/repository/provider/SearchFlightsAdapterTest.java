@@ -14,12 +14,12 @@ import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SearchFlightAdapterTest
+public class SearchFlightsAdapterTest
 {
   @Mock
   private ProviderFinder providerFinder;
   @InjectMocks
-  private SearchFlightAdapter searchFlightAdapter;
+  private SearchFlightsAdapter searchFlightsAdapter;
 
   @Test
   public void search()
@@ -27,7 +27,7 @@ public class SearchFlightAdapterTest
     SearchCriteria criteria = SearchCriteriaFixture.CPH_LHR_WITH_2AD_5DAYS;
     when(providerFinder.execute(criteria)).thenReturn(FlightsFixture.CPH_LHR_2AD_5DAYS);
 
-    searchFlightAdapter.search(criteria);
+    searchFlightsAdapter.search(criteria);
 
     verify(providerFinder).execute(criteria);
   }

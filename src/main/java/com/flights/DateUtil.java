@@ -23,12 +23,6 @@ public class DateUtil
     long todayMilisecond = today.getTimeInMillis();
     long destinationMilisecond = destination.getTimeInMillis();
     long diffMilisecond = destinationMilisecond - todayMilisecond;
-
-    if (diffMilisecond < 0)
-    {
-      return -1; // thow exception'???
-    }
-
     return (int) (diffMilisecond / (24 * 60 * 60 * 1000));
   }
 }

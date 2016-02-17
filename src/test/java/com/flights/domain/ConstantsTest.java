@@ -2,7 +2,7 @@ package com.flights.domain;
 
 import com.flights.domain.model.Price;
 
-public class Constants
+public class ConstantsTest
 {
   public static final Price BCN_MAD_IB_BASE_PRICE = new Price(259.0);
   public static final Price BCN_MAD_LH_BASE_PRICE = new Price(293.0);

@@ -16,18 +16,18 @@ import com.flights.domain.model.Flights;
 import com.flights.domain.model.FlightsFixture;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
-import com.flights.repository.provider.SearchFlightAdapter;
+import com.flights.repository.provider.SearchFlightsAdapter;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SearchAvailableFlightTest
+public class SearchFlightsAvailableTest
 {
   private SearchCriteria criteria = SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS;
   @Mock
-  private SearchFlightAdapter searchFlightAdapter;
+  private SearchFlightsAdapter searchFlightsAdapter;
   @Mock
-  private CalculateTotalPriceFlight calculateTotalPriceFlight;
+  private CalculatePricesFlight calculatePricesFlight;
   @InjectMocks
-  private SearchAvailableFlight search;
+  private SearchFlightsAvailable search;
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
@@ -40,10 +40,10 @@ public class SearchAvailableFlightTest
   @Before
   public void inicialize()
   {
-    when(searchFlightAdapter.search(criteria)).thenReturn(FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
-    when(calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS))
+    when(searchFlightsAdapter.search(criteria)).thenReturn(FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
+    when(calculatePricesFlight.calculate(criteria, FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS))
         .thenReturn(FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS.getTotalPrice());
-    when(calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS))
+    when(calculatePricesFlight.calculate(criteria, FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS))
         .thenReturn(FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS.getTotalPrice());
   }
 }

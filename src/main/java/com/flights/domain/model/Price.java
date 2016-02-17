@@ -58,5 +58,4 @@ public class Price
     }
     return true;
   }
-
 }

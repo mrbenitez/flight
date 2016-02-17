@@ -11,24 +11,22 @@ import com.flights.domain.model.SearchCriteriaFixture;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 import com.flights.repository.provider.ProviderFinder;
-import com.flights.repository.provider.SearchFlightAdapter;
+import com.flights.repository.provider.SearchFlightsAdapter;
 
-public class SearchAvailableFlightIT
+public class SearchFlightsAvailableIT
 {
-  private SearchFlightAdapter searchFlightAdapter = new SearchFlightAdapter(new ProviderFinder());
-  private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
-  private DestinationDateRule destinationDateRule = new DestinationDateRule();
-  private CalculateTotalPriceFlight calculateTotalPriceFlight = new CalculateTotalPriceFlight(
-      passengerTypeRuleFactory, destinationDateRule);
-  private SearchAvailableFlight search = new SearchAvailableFlight(searchFlightAdapter,
-      calculateTotalPriceFlight);
+  private SearchFlightsAdapter searchFlightsAdapter = new SearchFlightsAdapter(new ProviderFinder());
+  private CalculatePricesFlight calculatePricesFlight = new CalculatePricesFlight(
+      new PassengerTypeRuleFactory(), new DestinationDateRule());
+  private SearchFlightsAvailable search = new SearchFlightsAvailable(searchFlightsAdapter,
+      calculatePricesFlight);
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
   {
     Flights flights = search.execute(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
 
-    verify(flights, FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
+    assertFlights(flights, FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
   }
 
   @Test
@@ -36,10 +34,10 @@ public class SearchAvailableFlightIT
   {
     Flights flights = search.execute(SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
 
-    verify(flights, FlightsFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
+    assertFlights(flights, FlightsFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
   }
 
-  private void verify(Flights flights, Flights flightsExpected)
+  private void assertFlights(Flights flights, Flights flightsExpected)
   {
     assertThat("The flights are equals", flights, equalTo(flightsExpected));
   }

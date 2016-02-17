@@ -1,15 +1,15 @@
 package com.flights.domain.model;
 
-import static com.flights.domain.Constants.BCN_MAD_IB_BASE_PRICE;
-import static com.flights.domain.Constants.BCN_MAD_IB_WITH_1AD_2CH_2DAYS_TOTAL_PRICE;
-import static com.flights.domain.Constants.BCN_MAD_LH_BASE_PRICE;
-import static com.flights.domain.Constants.BCN_MAD_LH_WITH_1AD_2CH_2DAYS_TOTAL_PRICE;
-import static com.flights.domain.Constants.CPH_LHR_BA_BASE_PRICE;
-import static com.flights.domain.Constants.CPH_LHR_U2_BASE_PRICE;
-import static com.flights.domain.Constants.LHR_IST_LH_BASE_PRICE;
-import static com.flights.domain.Constants.LHR_IST_LH_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE;
-import static com.flights.domain.Constants.LHR_IST_TK_BASE_PRICE;
-import static com.flights.domain.Constants.LHR_IST_TK_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE;
+import static com.flights.domain.ConstantsTest.BCN_MAD_IB_BASE_PRICE;
+import static com.flights.domain.ConstantsTest.BCN_MAD_IB_WITH_1AD_2CH_2DAYS_TOTAL_PRICE;
+import static com.flights.domain.ConstantsTest.BCN_MAD_LH_BASE_PRICE;
+import static com.flights.domain.ConstantsTest.BCN_MAD_LH_WITH_1AD_2CH_2DAYS_TOTAL_PRICE;
+import static com.flights.domain.ConstantsTest.CPH_LHR_BA_BASE_PRICE;
+import static com.flights.domain.ConstantsTest.CPH_LHR_U2_BASE_PRICE;
+import static com.flights.domain.ConstantsTest.LHR_IST_LH_BASE_PRICE;
+import static com.flights.domain.ConstantsTest.LHR_IST_LH_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE;
+import static com.flights.domain.ConstantsTest.LHR_IST_TK_BASE_PRICE;
+import static com.flights.domain.ConstantsTest.LHR_IST_TK_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE;
 import static com.flights.domain.model.Airline.BA;
 import static com.flights.domain.model.Airline.IB;
 import static com.flights.domain.model.Airline.LH;

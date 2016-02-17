@@ -9,13 +9,13 @@ public enum Airport
       "Frakfurt"), IST("IST", "Istanbul"), AMS("AMS", "Amsterdam"), FCO("FCO", "Rome"), CPH("CPH",
           "Copenhagen"), XXX("XXX", "Unknow");
   private static final Map<String, Airport> AIRPORT_MAP = new HashMap<>();
-  private String code;
+  private String iata;
   private String name;
 
-  private Airport(String code, String name)
+  private Airport(String iata, String name)
   {
     this.name = name;
-    this.code = code;
+    this.iata = iata;
   }
 
   public String getName()
@@ -23,21 +23,21 @@ public enum Airport
     return name;
   }
 
-  public String getCode()
+  public String getIata()
   {
-    return code;
+    return iata;
   }
 
-  public static Airport getAirport(String code)
+  public static Airport getAirport(String iata)
   {
-    return AIRPORT_MAP.get(code);
+    return AIRPORT_MAP.get(iata);
   }
 
   static
   {
     for (Airport airport : Airport.values())
     {
-      AIRPORT_MAP.put(airport.getCode(), airport);
+      AIRPORT_MAP.put(airport.getIata(), airport);
     }
   }
 }

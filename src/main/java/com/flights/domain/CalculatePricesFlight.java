@@ -11,12 +11,12 @@ import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 
-public class CalculateTotalPriceFlight
+public class CalculatePricesFlight
 {
   private PassengerTypeRuleFactory passengerTypeRuleFactory;
   private DestinationDateRule destinationDateRule;
 
-  public CalculateTotalPriceFlight(PassengerTypeRuleFactory passengerTypeRuleFactory,
+  public CalculatePricesFlight(PassengerTypeRuleFactory passengerTypeRuleFactory,
       DestinationDateRule destinationDateRule)
   {
     this.passengerTypeRuleFactory = passengerTypeRuleFactory;

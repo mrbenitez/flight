@@ -10,16 +10,16 @@ import com.flights.domain.model.FlightsFixture;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 
-public class SearchFlightAdapterIT
+public class SearchFlightsAdapterIT
 {
-  private SearchFlightAdapter searchFlightAdapter = new SearchFlightAdapter(new ProviderFinder());
+  private SearchFlightsAdapter searchFlightsAdapter = new SearchFlightsAdapter(new ProviderFinder());
 
   @Test
   public void searchCphToLhrWith2AdAnd2DaysAdvacne()
   {
     SearchCriteria criteria = SearchCriteriaFixture.CPH_LHR_WITH_2AD_5DAYS;
 
-    Flights flights = searchFlightAdapter.search(criteria);
+    Flights flights = searchFlightsAdapter.search(criteria);
 
     assertThat("The flights are equals", flights, equalTo(FlightsFixture.CPH_LHR_2AD_5DAYS));
   }
