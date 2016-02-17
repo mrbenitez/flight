@@ -5,6 +5,7 @@ import java.util.Map;
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.PassengerType;
 import com.flights.domain.model.Passengers;
+import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
@@ -22,29 +23,29 @@ public class CalculateTotalPriceFlight
     this.destinationDateRule = destinationDateRule;
   }
 
-  public Double calculate(SearchCriteria criteria, Flight flight)
+  public Price calculate(SearchCriteria criteria, Flight flight)
   {
-    Double departureDatePrice = destinationDateRule.calculatePrice(criteria.getDepartureDate(),
-                                                                   flight.getBasePrice());
+    Price departureDatePrice = destinationDateRule.calculatePrice(criteria.getDepartureDate(),
+                                                                  flight.getBasePrice());
 
     return calculateTotalPriceByAllPassenger(criteria.getPassenger(),
                                              flight,
                                              departureDatePrice);
   }
 
-  private Double calculateTotalPriceByAllPassenger(Passengers passenger,
-                                                   Flight flight,
-                                                   Double departureDatePrice)
+  private Price calculateTotalPriceByAllPassenger(Passengers passenger,
+                                                  Flight flight,
+                                                  Price departureDatePrice)
   {
     Double totalPrice = 0.0;
     for (PassengerType passangerType : passenger.get().keySet())
     {
       int numPassenger = obtainNumberPassenger(passenger.get(), passangerType);
-      Double basePrice = calculateBasePrice(flight, departureDatePrice, passangerType);
+      Price basePrice = calculateBasePrice(flight, departureDatePrice, passangerType);
       PassengerTypeRule passengerTypeRule = obtainPassengerTypeRule(passangerType);
-      totalPrice += passengerTypeRule.calculatePrice(basePrice, numPassenger);
+      totalPrice += passengerTypeRule.calculatePrice(basePrice, numPassenger).getValue();
     }
-    return totalPrice;
+    return new Price(totalPrice);
   }
 
   private Integer obtainNumberPassenger(Map<PassengerType, Integer> passenger, PassengerType passangerType)
@@ -52,14 +53,14 @@ public class CalculateTotalPriceFlight
     return passenger.get(passangerType);
   }
 
-  private Double calculateBasePrice(Flight flight, Double departureDatePrice, PassengerType passangerType)
+  private Price calculateBasePrice(Flight flight, Price departureDatePrice, PassengerType passangerType)
   {
-    Double basePrice = departureDatePrice;
+    Price basePrice = departureDatePrice;
     basePrice = basePriceWhenIsInfant(flight, passangerType, basePrice);
     return basePrice;
   }
 
-  private Double basePriceWhenIsInfant(Flight flight, PassengerType passangerType, Double basePrice)
+  private Price basePriceWhenIsInfant(Flight flight, PassengerType passangerType, Price basePrice)
   {
     if (PassengerType.INFANT.equals(passangerType))
     {

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import com.flights.domain.model.FlightFixture;
+import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteriaFixture;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
@@ -20,8 +21,8 @@ public class CalculateTotalPriceFlightIT
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
   {
-    Double totalPrice = calculateTotalPriceFlight.calculate(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS,
-                                                            FlightFixture.BCN_MAD_LH_2DAYS);
+    Price totalPrice = calculateTotalPriceFlight.calculate(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS,
+                                                           FlightFixture.BCN_MAD_LH_2DAYS);
 
     assertThat("The price is equals",
                totalPrice,
@@ -31,7 +32,7 @@ public class CalculateTotalPriceFlightIT
   @Test
   public void searchLhrToIstdWith2Ad1Ch1InAnd15DaysAdvance()
   {
-    Double totalPrice = calculateTotalPriceFlight
+    Price totalPrice = calculateTotalPriceFlight
         .calculate(SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS,
                    FlightFixture.LHR_IST_LH_15DAYS);
 

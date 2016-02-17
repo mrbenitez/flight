@@ -7,12 +7,12 @@ public class Flight
   private Route route;
   private Date departureDate;
   private String flightCode;
-  private Double basePrice;
-  private Double infantPrice;
-  private Double totalPrice;
+  private Price basePrice;
+  private Price infantPrice;
+  private Price totalPrice;
   private String airline;
 
-  private Flight(Route route, Date departureDate, String flightCode, Double basePrice, Double infantPrice,
+  private Flight(Route route, Date departureDate, String flightCode, Price basePrice, Price infantPrice,
       String airline)
   {
     this.route = route;
@@ -23,12 +23,12 @@ public class Flight
     this.airline = airline;
   }
 
-  public Double getTotalPrice()
+  public Price getTotalPrice()
   {
     return totalPrice;
   }
 
-  public void setTotalPrice(Double totalPrice)
+  public void setTotalPrice(Price totalPrice)
   {
     this.totalPrice = totalPrice;
   }
@@ -48,12 +48,12 @@ public class Flight
     return flightCode;
   }
 
-  public Double getBasePrice()
+  public Price getBasePrice()
   {
     return basePrice;
   }
 
-  public Double getInfantPrice()
+  public Price getInfantPrice()
   {
     return infantPrice;
   }
@@ -82,6 +82,7 @@ public class Flight
     result = prime * result + ((flightCode == null) ? 0 : flightCode.hashCode());
     result = prime * result + ((infantPrice == null) ? 0 : infantPrice.hashCode());
     result = prime * result + ((route == null) ? 0 : route.hashCode());
+    result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
     return result;
   }
 
@@ -174,6 +175,10 @@ public class Flight
         return false;
       }
     }
+    else if (!totalPrice.equals(other.totalPrice))
+    {
+      return false;
+    }
     return true;
   }
 
@@ -182,11 +187,11 @@ public class Flight
     private Route route;
     private Date departureDate;
     private String flightCode;
-    private Double basePrice;
-    private Double infantPrice;
+    private Price basePrice;
+    private Price infantPrice;
     private String airline;
 
-    public Builder(Route route, Date departureDate, String flightCode, Double basePrice, Double infantPrice,
+    public Builder(Route route, Date departureDate, String flightCode, Price basePrice, Price infantPrice,
         String airline)
     {
       this.route = route;

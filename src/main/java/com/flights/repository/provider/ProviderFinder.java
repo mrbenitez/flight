@@ -9,6 +9,7 @@ import com.flights.domain.model.Airline;
 import com.flights.domain.model.Airport;
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.Flights;
+import com.flights.domain.model.Price;
 import com.flights.domain.model.Route;
 import com.flights.domain.model.SearchCriteria;
 
@@ -60,29 +61,12 @@ public class ProviderFinder
 
   private Flight createFlight(SearchCriteria criteria, String flightCode, String priceBase, Route route)
   {
-    Double basePrice = Double.valueOf(priceBase.trim());
+    Price basePrice = new Price(Double.valueOf(priceBase.trim()));
     String airlineCode = flightCode.substring(0, 2);
     Airline airline = Airline.getAirline(airlineCode);
-    Double infantPrice = InfantPriceFinder.obtainPrice(airline);
-    Flight.Builder builder = new Flight.Builder(route, criteria.getDepartureDate(), flightCode, basePrice,
-        infantPrice, airline.getName());
+    Price infantPrice = InfantPriceFinder.obtainPrice(airline);
+    Flight.Builder builder = new Flight.Builder(route, criteria.getDepartureDate(), flightCode,
+        basePrice, infantPrice, airline.getName());
     return builder.build();
   }
-
-  // Map<Route, ProviderFlight> mapProviderFlight = new HashMap<Route, ProviderFlight>();
-  //
-  // private List<ProviderFlight> finder(SearchCriteria criteria)
-  // {
-  // List<ProviderFlight> providerFlights = new ArrayList<>();
-  // if (mapProviderFlight.containsKey(criteria.getRoute()))
-  // {
-  // providerFlights.add(mapProviderFlight.get(criteria.getRoute()));
-  // }
-  // return providerFlights;
-  // }
-  //
-  // public ProviderFinder()
-  // {
-  // mapProviderFlight.put(key, value);
-  // }
 }

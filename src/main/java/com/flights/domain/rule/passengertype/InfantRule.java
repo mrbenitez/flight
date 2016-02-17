@@ -1,8 +1,10 @@
 package com.flights.domain.rule.passengertype;
 
+import com.flights.domain.model.Price;
+
 public class InfantRule extends PassengerTypeRule
 {
-  public Double calculatePrice(Double basePrice, Integer infantsNumber)
+  public Price calculatePrice(Price basePrice, Integer infantsNumber)
   {
     return calculateDefault(basePrice, infantsNumber);
   }

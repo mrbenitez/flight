@@ -2,6 +2,7 @@ package com.flights.domain;
 
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.Flights;
+import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.repository.provider.SearchFlightAdapter;
 
@@ -33,8 +34,8 @@ public class SearchAvailableFlight
   {
     for (Flight flight : flights.getFlights())
     {
-      Double totalPrice = calculateTotalPriceFlight.calculate(criteria, flight);
-      flight.setTotalPrice(totalPrice);// TODO VER SI USAR OTRO OBJETO price para no devolver ni usar double
+      Price totalPrice = calculateTotalPriceFlight.calculate(criteria, flight);
+      flight.setTotalPrice(totalPrice);
     }
   }
 }

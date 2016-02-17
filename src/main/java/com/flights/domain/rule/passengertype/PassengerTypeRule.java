@@ -1,11 +1,13 @@
 package com.flights.domain.rule.passengertype;
 
+import com.flights.domain.model.Price;
+
 public abstract class PassengerTypeRule
 {
-  public abstract Double calculatePrice(Double basePrice, Integer passengersNumber);
+  public abstract Price calculatePrice(Price basePrice, Integer passengersNumber);
 
-  protected Double calculateDefault(Double basePrice, Integer passengerNumber)
+  protected Price calculateDefault(Price basePrice, Integer passengerNumber)
   {
-    return basePrice * passengerNumber;
+    return new Price(basePrice.getValue() * passengerNumber);
   }
 }

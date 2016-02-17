@@ -77,7 +77,7 @@ public class FlightFixture
 
   private static Flight createFlightProvider(Airport origin,
                                              Airport destination,
-                                             Double basePrice,
+                                             Price basePrice,
                                              String flightCode,
                                              Airline airline,
                                              int daysAdvance)
@@ -88,7 +88,7 @@ public class FlightFixture
     return builder.build();
   }
 
-  private static Flight createFlightFinal(Flight flight, Double totalPrice)
+  private static Flight createFlightFinal(Flight flight, Price totalPrice)
   {
     flight.setTotalPrice(totalPrice);
     return flight;

@@ -14,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.flights.domain.model.FlightFixture;
 import com.flights.domain.model.PassengerType;
+import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 import com.flights.domain.rule.destinationdate.DestinationDateRule;
@@ -36,12 +37,12 @@ public class CalculateTotalPriceFlightTest
   public void calculateWhenBAFromBcnToMad1Ad2ChAnd2DaysAdvance()
   {
     SearchCriteria criteria = SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS;
-    inizializeDestinationDateRule(criteria.getDepartureDate(), 259.0, 388.5);
-    inizializeDestinationDateRule(criteria.getDepartureDate(), 293.0, 439.5);
+    inizializeDestinationDateRule(criteria.getDepartureDate(), new Price(259.0), new Price(388.5));
+    inizializeDestinationDateRule(criteria.getDepartureDate(), new Price(293.0), new Price(439.5));
     inicializePassengerTypeRuleFactory(PassengerType.ADULT, new AdultRule());
     inicializePassengerTypeRuleFactory(PassengerType.CHILD, new ChildRule());
 
-    Double totalPrice = calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_LH_2DAYS);
+    Price totalPrice = calculateTotalPriceFlight.calculate(criteria, FlightFixture.BCN_MAD_LH_2DAYS);
 
     assertThat("The flights are equals",
                totalPrice,
@@ -53,7 +54,7 @@ public class CalculateTotalPriceFlightTest
     when(passengerTypeRuleFactory.get(passangerType)).thenReturn(rule);
   }
 
-  private void inizializeDestinationDateRule(Date departureDate, Double basePrice, Double totalPrice)
+  private void inizializeDestinationDateRule(Date departureDate, Price basePrice, Price totalPrice)
   {
     when(destinationDateRule.calculatePrice(departureDate, basePrice)).thenReturn(totalPrice);
   }

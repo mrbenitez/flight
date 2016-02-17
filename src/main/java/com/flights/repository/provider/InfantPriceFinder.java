@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.flights.domain.model.Airline;
+import com.flights.domain.model.Price;
 
 public class InfantPriceFinder
 {
@@ -20,13 +21,13 @@ public class InfantPriceFinder
     infantPriceMap.put(Airline.U2, 19.9);
   }
 
-  public static Double obtainPrice(Airline airline)
+  public static Price obtainPrice(Airline airline)
   {
     Double price = 0.0;
     if (infantPriceMap.containsKey(airline))
     {
       price = infantPriceMap.get(airline);
     }
-    return price;
+    return new Price(price);
   }
 }

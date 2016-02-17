@@ -1,18 +1,20 @@
 package com.flights.domain.rule.passengertype;
 
+import com.flights.domain.model.Price;
+
 public class ChildRule extends PassengerTypeRule
 {
   private static final Double DISCOUNT = 0.33;
 
-  public Double calculatePrice(Double basePrice, Integer childrenNumber)
+  public Price calculatePrice(Price basePrice, Integer childrenNumber)
   {
-    Double base = calculateDefault(basePrice, childrenNumber);
+    Price base = calculateDefault(basePrice, childrenNumber);
 
     return calculatePriceWithDisocunt(base);
   }
 
-  private Double calculatePriceWithDisocunt(Double base)
+  private Price calculatePriceWithDisocunt(Price base)
   {
-    return base * (1 - DISCOUNT);
+    return new Price(base.getValue() * (1 - DISCOUNT));
   }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.flights.DateUtil;
+import com.flights.domain.model.Price;
 
 public class DestinationDateRule
 {
@@ -13,7 +14,7 @@ public class DestinationDateRule
   private static final double PORCENTAJE_BETWEEN_15_30_DAYS_ADVANCE = 1.2;
   private static final double PORCENTAJE_LESS_3_DAYS_ADVANCE = 1.5;
 
-  public Double calculatePrice(Date destinationDate, Double basePrice)
+  public Price calculatePrice(Date destinationDate, Price basePrice)
   {
     int diffDays = calculateDaysAdvance(destinationDate);
     Double taxPorcentage = PORCENTAJE_LESS_3_DAYS_ADVANCE;
@@ -30,7 +31,7 @@ public class DestinationDateRule
       taxPorcentage = PORCENTAJE_BETWEEN_15_30_DAYS_ADVANCE;
     }
 
-    return basePrice * taxPorcentage;
+    return new Price(basePrice.getValue() * taxPorcentage);
   }
 
   private int calculateDaysAdvance(Date destinationDate)
