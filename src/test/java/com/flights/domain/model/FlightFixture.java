@@ -21,7 +21,8 @@ import static com.flights.domain.model.Airport.IST;
 import static com.flights.domain.model.Airport.LHR;
 import static com.flights.domain.model.Airport.MAD;
 
-import com.flights.DateUtil;
+import java.util.Date;
+
 import com.flights.repository.provider.InfantPriceFinder;
 
 public class FlightFixture
@@ -82,8 +83,10 @@ public class FlightFixture
                                              Airline airline,
                                              int daysAdvance)
   {
+
+    MyDate today = new MyDate(new Date());
     Route route = new Route(origin, destination);
-    Flight.Builder builder = new Flight.Builder(route, DateUtil.obtainDateWithDaysAdvance(daysAdvance),
+    Flight.Builder builder = new Flight.Builder(route, today.obtainDateWithDaysAdvance(daysAdvance),
         flightCode, basePrice, InfantPriceFinder.obtainPrice(airline), airline.getName());
     return builder.build();
   }

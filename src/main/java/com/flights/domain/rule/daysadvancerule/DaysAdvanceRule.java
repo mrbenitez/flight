@@ -1,10 +1,6 @@
 package com.flights.domain.rule.daysadvancerule;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import com.flights.DateUtil;
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.Price;
 
 public class DaysAdvanceRule
@@ -14,9 +10,9 @@ public class DaysAdvanceRule
   private static final double PERCENTAGE_BETWEEN_3_15_DAYS_ADVANCE = 1.2;
   private static final double PERCENTAGE_LESS_3_DAYS_ADVANCE = 1.5;
 
-  public Price calculatePrice(Date destinationDate, Price basePrice)
+  public Price calculatePrice(MyDate today, MyDate departureDate, Price basePrice)
   {
-    int diffDays = calculateDaysAdvance(destinationDate);
+    int diffDays = today.daysBetweenTwoDates(departureDate);
     Double taxPorcentage = PERCENTAGE_LESS_3_DAYS_ADVANCE;
     if (diffDays > 30)
     {
@@ -32,13 +28,5 @@ public class DaysAdvanceRule
     }
 
     return new Price(basePrice.getValue() * taxPorcentage);
-  }
-
-  private int calculateDaysAdvance(Date destinationDate)
-  {
-    Calendar todayCalendar = new GregorianCalendar();
-    Calendar destinationDateCalendar = new GregorianCalendar();
-    destinationDateCalendar.setTime(destinationDate);
-    return DateUtil.daysBetweenTwoDates(todayCalendar, destinationDateCalendar);
   }
 }

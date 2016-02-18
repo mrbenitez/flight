@@ -65,7 +65,7 @@ public class ProviderFinder
     String airlineCode = flightCode.substring(0, 2);
     Airline airline = Airline.getAirline(airlineCode);
     Price infantPrice = InfantPriceFinder.obtainPrice(airline);
-    Flight.Builder builder = new Flight.Builder(route, criteria.getDepartureDate(), flightCode,
+    Flight.Builder builder = new Flight.Builder(route, criteria.getDepartureDate().getDate(), flightCode,
         basePrice, infantPrice, airline.getName());
     return builder.build();
   }

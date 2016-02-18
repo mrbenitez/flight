@@ -12,8 +12,6 @@ import static com.flights.domain.model.PassengersFixture.TWO_AD_ONE_CH_ONE_IN;
 
 import java.util.Date;
 
-import com.flights.DateUtil;
-
 public class SearchCriteriaFixture
 {
   public static final SearchCriteria CPH_LHR_WITH_2AD_5DAYS = create(CPH, LHR, 5, TWO_AD);
@@ -27,8 +25,9 @@ public class SearchCriteriaFixture
   private static SearchCriteria
           create(Airport origin, Airport destination, int daysAdvance, Passengers passengers)
   {
+    MyDate today = new MyDate(new Date());
     Route route = new Route(origin, destination);
-    Date departureDate = DateUtil.obtainDateWithDaysAdvance(daysAdvance);
+    Date departureDate = today.obtainDateWithDaysAdvance(daysAdvance);
     SearchCriteria searchCriteria = new SearchCriteria(route, departureDate, passengers);
     return searchCriteria;
   }

@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.flights.domain.model.FlightFixture;
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.PassengerType;
 import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteria;
@@ -32,6 +33,7 @@ public class CalculatePricesFlightTest
   private Price adultTotalPrice = new Price(408.48);
   private Price childTotalPrice = new Price(136.84);
   private Price infantTotalPrice = new Price(7.0);
+  private MyDate today = new MyDate(new Date());
   @Mock
   private PassengerTypeRule adultRule;
   @Mock
@@ -53,7 +55,8 @@ public class CalculatePricesFlightTest
     createScenario();
 
     Price totalPrice = calculatePricesFlight.calculate(criteria,
-                                                       FlightFixture.LHR_IST_LH_15DAYS);
+                                                       FlightFixture.LHR_IST_LH_15DAYS,
+                                                       today);
 
     assertThat("The flights are equals",
                totalPrice,
@@ -82,9 +85,9 @@ public class CalculatePricesFlightTest
     when(passengerTypeRuleFactory.get(passangerType)).thenReturn(rule);
   }
 
-  private void inizializeDestinationDateRule(Date departureDate, Price basePrice, Price totalPrice)
+  private void inizializeDestinationDateRule(MyDate departureDate, Price basePrice, Price totalPrice)
   {
-    when(daysAdvanceRule.calculatePrice(departureDate, basePrice)).thenReturn(totalPrice);
+    when(daysAdvanceRule.calculatePrice(today, departureDate, basePrice)).thenReturn(totalPrice);
   }
 
   private void inicializePassengerType(PassengerTypeRule rule,

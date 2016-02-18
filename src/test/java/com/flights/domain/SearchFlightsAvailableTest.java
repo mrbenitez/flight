@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.flights.domain.model.FlightFixture;
 import com.flights.domain.model.Flights;
 import com.flights.domain.model.FlightsFixture;
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
 import com.flights.repository.provider.SearchFlightsAdapter;
@@ -22,6 +25,7 @@ import com.flights.repository.provider.SearchFlightsAdapter;
 public class SearchFlightsAvailableTest
 {
   private SearchCriteria criteria = SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS;
+  private MyDate today = new MyDate(new Date());
   @Mock
   private SearchFlightsAdapter searchFlightsAdapter;
   @Mock
@@ -41,9 +45,9 @@ public class SearchFlightsAvailableTest
   public void inicialize()
   {
     when(searchFlightsAdapter.search(criteria)).thenReturn(FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS);
-    when(calculatePricesFlight.calculate(criteria, FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS))
+    when(calculatePricesFlight.calculate(criteria, FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS, today))
         .thenReturn(FlightFixture.BCN_MAD_BA_WITH_1AD_2CH_2DAYS.getTotalPrice());
-    when(calculatePricesFlight.calculate(criteria, FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS))
+    when(calculatePricesFlight.calculate(criteria, FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS, today))
         .thenReturn(FlightFixture.BCN_MAD_U2_WITH_1AD_2CH_2DAYS.getTotalPrice());
   }
 }

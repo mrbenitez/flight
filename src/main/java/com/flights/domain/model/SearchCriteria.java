@@ -5,14 +5,14 @@ import java.util.Date;
 public class SearchCriteria
 {
   private Route route;
-  private Date departureDate;
+  private MyDate departureDate;
   private Passengers passengers;
 
   public SearchCriteria(Route route, Date departureDate, Passengers passengers)
   {
     super();
     this.route = route;
-    this.departureDate = departureDate;
+    this.departureDate = new MyDate(departureDate);
     this.passengers = passengers;
   }
 
@@ -21,7 +21,7 @@ public class SearchCriteria
     return route;
   }
 
-  public Date getDepartureDate()
+  public MyDate getDepartureDate()
   {
     return departureDate;
   }

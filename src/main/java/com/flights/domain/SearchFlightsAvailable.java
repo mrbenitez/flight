@@ -1,7 +1,10 @@
 package com.flights.domain;
 
+import java.util.Date;
+
 import com.flights.domain.model.Flight;
 import com.flights.domain.model.Flights;
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.repository.provider.SearchFlightsAdapter;
 
@@ -31,9 +34,10 @@ public class SearchFlightsAvailable
 
   private void fillTotalPrice(SearchCriteria criteria, Flights flights)
   {
+    MyDate today = new MyDate(new Date());
     for (Flight flight : flights.getFlights())
     {
-      flight.setTotalPrice(calculatePricesFlight.calculate(criteria, flight));
+      flight.setTotalPrice(calculatePricesFlight.calculate(criteria, flight, today));
     }
   }
 }

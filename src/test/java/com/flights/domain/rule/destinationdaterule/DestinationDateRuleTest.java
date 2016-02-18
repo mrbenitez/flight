@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.Price;
 
 @RunWith(Parameterized.class)
@@ -23,12 +24,12 @@ public class DestinationDateRuleTest
   private Price basePrice = new Price(100.0);
 
   private Price priceExpected;
-  private Date departureDate;
+  private MyDate departureDate;
 
   public DestinationDateRuleTest(Price priceExpected, Date departureDate)
   {
     this.priceExpected = priceExpected;
-    this.departureDate = departureDate;
+    this.departureDate = new MyDate(departureDate);
   }
 
   @Parameters
@@ -51,7 +52,7 @@ public class DestinationDateRuleTest
     execute(basePrice, priceExpected, departureDate);
   }
 
-  private void execute(Price basePrice, Price priceExpected, Date departureDate)
+  private void execute(Price basePrice, Price priceExpected, MyDate departureDate)
   {
     Price destinationDayPrice = destinationDateRule.calculatePrice(basePrice, departureDate);
 

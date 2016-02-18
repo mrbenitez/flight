@@ -3,9 +3,12 @@ package com.flights.domain;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import com.flights.domain.model.FlightFixture;
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteriaFixture;
 import com.flights.domain.rule.daysadvancerule.DaysAdvanceRule;
@@ -19,12 +22,14 @@ public class CalculatePricesFlightIT
   private DestinationDateRule destinationDateRule = new DestinationDateRule();
   private CalculatePricesFlight calculatePricesFlight = new CalculatePricesFlight(
       passengerTypeRuleFactory, daysAdvanceRule, destinationDateRule);
+  private MyDate today = new MyDate(new Date());
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
   {
     Price totalPrice = calculatePricesFlight.calculate(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS,
-                                                       FlightFixture.BCN_MAD_LH_2DAYS);
+                                                       FlightFixture.BCN_MAD_LH_2DAYS,
+                                                       today);
 
     assertThat("The price is equals",
                totalPrice,
@@ -36,7 +41,8 @@ public class CalculatePricesFlightIT
   {
     Price totalPrice = calculatePricesFlight
         .calculate(SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS,
-                   FlightFixture.LHR_IST_LH_15DAYS);
+                   FlightFixture.LHR_IST_LH_15DAYS,
+                   today);
 
     assertThat("The price is equals",
                totalPrice,

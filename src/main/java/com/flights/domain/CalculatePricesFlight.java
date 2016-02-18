@@ -3,6 +3,7 @@ package com.flights.domain;
 import java.util.Map;
 
 import com.flights.domain.model.Flight;
+import com.flights.domain.model.MyDate;
 import com.flights.domain.model.PassengerType;
 import com.flights.domain.model.Passengers;
 import com.flights.domain.model.Price;
@@ -26,9 +27,10 @@ public class CalculatePricesFlight
     this.destinationDateRule = destinationDateRule;
   }
 
-  public Price calculate(SearchCriteria criteria, Flight flight)
+  public Price calculate(SearchCriteria criteria, Flight flight, MyDate today)
   {
-    Price daysAdvancebasePrice = daysAdvanceRule.calculatePrice(criteria.getDepartureDate(),
+    Price daysAdvancebasePrice = daysAdvanceRule.calculatePrice(today,
+                                                                criteria.getDepartureDate(),
                                                                 flight.getBasePrice());
 
     Price departureDatebasePrice = destinationDateRule.calculatePrice(daysAdvancebasePrice,
