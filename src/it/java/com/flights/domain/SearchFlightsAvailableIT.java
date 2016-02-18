@@ -37,6 +37,14 @@ public class SearchFlightsAvailableIT
     assertFlights(flights, FlightsFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS);
   }
 
+  @Test
+  public void searchRouteNotExist()
+  {
+    Flights flights = search.execute(SearchCriteriaFixture.XXX_LHR_2AD_2DAYS);
+
+    assertFlights(flights, FlightsFixture.ROUTE_NOT_EXIST);
+  }
+
   private void assertFlights(Flights flights, Flights flightsExpected)
   {
     assertThat("The flights are equals", flights, equalTo(flightsExpected));
