@@ -17,7 +17,8 @@ import com.flights.domain.model.PassengerType;
 import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteria;
 import com.flights.domain.model.SearchCriteriaFixture;
-import com.flights.domain.rule.destinationdate.DestinationDateRule;
+import com.flights.domain.rule.daysadvancerule.DaysAdvanceRule;
+import com.flights.domain.rule.destinationdaterule.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 
@@ -26,9 +27,10 @@ public class CalculatePricesFlightTest
 {
   private SearchCriteria criteria = SearchCriteriaFixture.LHR_IST_WITH_2AD_1CH_1IN_15DAYS;
   private Price dateBasePrice = new Price(177.6);
+  private Price destinationDatePrice = new Price(204.24);
   private Price infantPrice = new Price(7.0);
-  private Price adultTotalPrice = new Price(355.2);
-  private Price childTotalPrice = new Price(118.99);
+  private Price adultTotalPrice = new Price(408.48);
+  private Price childTotalPrice = new Price(136.84);
   private Price infantTotalPrice = new Price(7.0);
   @Mock
   private PassengerTypeRule adultRule;
@@ -36,6 +38,8 @@ public class CalculatePricesFlightTest
   private PassengerTypeRule childRule;
   @Mock
   private PassengerTypeRule infantRule;
+  @Mock
+  private DaysAdvanceRule daysAdvanceRule;
   @Mock
   private DestinationDateRule destinationDateRule;
   @Mock
@@ -58,8 +62,8 @@ public class CalculatePricesFlightTest
 
   private void createScenario()
   {
-    inicializePassengerType(adultRule, dateBasePrice, 2, adultTotalPrice);
-    inicializePassengerType(childRule, dateBasePrice, 1, childTotalPrice);
+    inicializePassengerType(adultRule, destinationDatePrice, 2, adultTotalPrice);
+    inicializePassengerType(childRule, destinationDatePrice, 1, childTotalPrice);
     inicializePassengerType(infantRule, infantPrice, 1, infantTotalPrice);
     inicializePassengerTypeRuleFactory(PassengerType.ADULT, adultRule);
     inicializePassengerTypeRuleFactory(PassengerType.CHILD, childRule);
@@ -67,6 +71,10 @@ public class CalculatePricesFlightTest
     inizializeDestinationDateRule(criteria.getDepartureDate(),
                                   FlightFixture.LHR_IST_LH_15DAYS.getBasePrice(),
                                   dateBasePrice);
+
+    when(destinationDateRule.calculatePrice(dateBasePrice, criteria.getDepartureDate()))
+        .thenReturn(destinationDatePrice);
+
   }
 
   private void inicializePassengerTypeRuleFactory(PassengerType passangerType, PassengerTypeRule rule)
@@ -76,7 +84,7 @@ public class CalculatePricesFlightTest
 
   private void inizializeDestinationDateRule(Date departureDate, Price basePrice, Price totalPrice)
   {
-    when(destinationDateRule.calculatePrice(departureDate, basePrice)).thenReturn(totalPrice);
+    when(daysAdvanceRule.calculatePrice(departureDate, basePrice)).thenReturn(totalPrice);
   }
 
   private void inicializePassengerType(PassengerTypeRule rule,

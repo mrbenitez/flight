@@ -7,30 +7,36 @@ import com.flights.domain.model.PassengerType;
 import com.flights.domain.model.Passengers;
 import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteria;
-import com.flights.domain.rule.destinationdate.DestinationDateRule;
+import com.flights.domain.rule.daysadvancerule.DaysAdvanceRule;
+import com.flights.domain.rule.destinationdaterule.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 
 public class CalculatePricesFlight
 {
   private PassengerTypeRuleFactory passengerTypeRuleFactory;
+  private DaysAdvanceRule daysAdvanceRule;
   private DestinationDateRule destinationDateRule;
 
   public CalculatePricesFlight(PassengerTypeRuleFactory passengerTypeRuleFactory,
-      DestinationDateRule destinationDateRule)
+      DaysAdvanceRule daysAdvanceRule, DestinationDateRule destinationDateRule)
   {
     this.passengerTypeRuleFactory = passengerTypeRuleFactory;
+    this.daysAdvanceRule = daysAdvanceRule;
     this.destinationDateRule = destinationDateRule;
   }
 
   public Price calculate(SearchCriteria criteria, Flight flight)
   {
-    Price departureDatePrice = destinationDateRule.calculatePrice(criteria.getDepartureDate(),
-                                                                  flight.getBasePrice());
+    Price daysAdvancebasePrice = daysAdvanceRule.calculatePrice(criteria.getDepartureDate(),
+                                                                flight.getBasePrice());
+
+    Price departureDatebasePrice = destinationDateRule.calculatePrice(daysAdvancebasePrice,
+                                                                      criteria.getDepartureDate());
 
     return calculateTotalPriceByAllPassenger(criteria.getPassenger(),
                                              flight,
-                                             departureDatePrice);
+                                             departureDatebasePrice);
   }
 
   private Price calculateTotalPriceByAllPassenger(Passengers passenger,

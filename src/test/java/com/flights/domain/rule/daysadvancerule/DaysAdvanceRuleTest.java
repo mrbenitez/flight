@@ -1,4 +1,4 @@
-package com.flights.domain.rule.destinationdate;
+package com.flights.domain.rule.daysadvancerule;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -9,15 +9,16 @@ import java.util.Date;
 import org.junit.Test;
 
 import com.flights.domain.model.Price;
+import com.flights.domain.rule.daysadvancerule.DaysAdvanceRule;
 
-public class DestinationDateRuleTest
+public class DaysAdvanceRuleTest
 {
   private static final Price BASE_PRICE = new Price(100.0);
   private static final Price TOTAL_PRICE_WITH_LESS_3DAYS_ADVANCE = new Price(150.0);
   private static final Price TOTAL_PRICE_WITH_BETWEEN_3_15_DAYS_ADVANCE = new Price(120.0);
   private static final Price TOTAL_PRICE_WITH_BETWEEN_16_30_DAYS_ADVANCE = new Price(100.0);
   private static final Price TOTAL_PRICE_WITH_MORE_30DAYS_ADVANCE = new Price(80.0);
-  private DestinationDateRule destinationDateRule = new DestinationDateRule();
+  private DaysAdvanceRule destinationDateRule = new DaysAdvanceRule();
 
   @Test
   public void calculatePriceWithLess3DaysAdvance()

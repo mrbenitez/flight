@@ -8,21 +8,23 @@ import org.junit.Test;
 import com.flights.domain.model.FlightFixture;
 import com.flights.domain.model.Price;
 import com.flights.domain.model.SearchCriteriaFixture;
-import com.flights.domain.rule.destinationdate.DestinationDateRule;
+import com.flights.domain.rule.daysadvancerule.DaysAdvanceRule;
+import com.flights.domain.rule.destinationdaterule.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 
 public class CalculatePricesFlightIT
 {
   private PassengerTypeRuleFactory passengerTypeRuleFactory = new PassengerTypeRuleFactory();
+  private DaysAdvanceRule daysAdvanceRule = new DaysAdvanceRule();
   private DestinationDateRule destinationDateRule = new DestinationDateRule();
   private CalculatePricesFlight calculatePricesFlight = new CalculatePricesFlight(
-      passengerTypeRuleFactory, destinationDateRule);
+      passengerTypeRuleFactory, daysAdvanceRule, destinationDateRule);
 
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
   {
     Price totalPrice = calculatePricesFlight.calculate(SearchCriteriaFixture.BCN_MAD_WITH_1AD_2CH_2DAYS,
-                                                           FlightFixture.BCN_MAD_LH_2DAYS);
+                                                       FlightFixture.BCN_MAD_LH_2DAYS);
 
     assertThat("The price is equals",
                totalPrice,

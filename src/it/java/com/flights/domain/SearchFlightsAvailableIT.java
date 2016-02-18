@@ -8,7 +8,8 @@ import org.junit.Test;
 import com.flights.domain.model.Flights;
 import com.flights.domain.model.FlightsFixture;
 import com.flights.domain.model.SearchCriteriaFixture;
-import com.flights.domain.rule.destinationdate.DestinationDateRule;
+import com.flights.domain.rule.daysadvancerule.DaysAdvanceRule;
+import com.flights.domain.rule.destinationdaterule.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 import com.flights.repository.provider.ProviderFinder;
 import com.flights.repository.provider.SearchFlightsAdapter;
@@ -17,7 +18,7 @@ public class SearchFlightsAvailableIT
 {
   private SearchFlightsAdapter searchFlightsAdapter = new SearchFlightsAdapter(new ProviderFinder());
   private CalculatePricesFlight calculatePricesFlight = new CalculatePricesFlight(
-      new PassengerTypeRuleFactory(), new DestinationDateRule());
+      new PassengerTypeRuleFactory(), new DaysAdvanceRule(), new DestinationDateRule());
   private SearchFlightsAvailable search = new SearchFlightsAvailable(searchFlightsAdapter,
       calculatePricesFlight);
 

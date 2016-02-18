@@ -14,6 +14,6 @@ public class ConstantsTest
 
   public static final Price LHR_IST_TK_BASE_PRICE = new Price(250.0);
   public static final Price LHR_IST_LH_BASE_PRICE = new Price(148.0);
-  public static final Price LHR_IST_TK_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE = new Price(806.0);
-  public static final Price LHR_IST_LH_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE = new Price(481.19);
+  public static final Price LHR_IST_TK_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE = new Price(926.15);
+  public static final Price LHR_IST_LH_WITH_2AD_1CH_1IN_15DAYS_TOTAL_PRICE = new Price(552.32);
 }

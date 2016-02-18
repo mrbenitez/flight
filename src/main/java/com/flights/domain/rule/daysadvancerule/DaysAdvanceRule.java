@@ -1,4 +1,4 @@
-package com.flights.domain.rule.destinationdate;
+package com.flights.domain.rule.daysadvancerule;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import com.flights.DateUtil;
 import com.flights.domain.model.Price;
 
-public class DestinationDateRule
+public class DaysAdvanceRule
 {
   private static final double PERCENTAGE_MORE_30_DAYS_ADVANCE = 0.8;
   private static final double PERCENTAGE_BETWEEN_16_30_DAYS_ADVANCE = 1.0;
