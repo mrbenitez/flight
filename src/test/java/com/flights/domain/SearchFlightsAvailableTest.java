@@ -29,14 +29,23 @@ public class SearchFlightsAvailableTest
   @InjectMocks
   private SearchFlightsAvailable search;
 
+  // REV Test on a wrong detail level
+  /*
+  You just test this sequence:
+  - find all flights
+  - for each flight, calculate a price
+  You don't care about origin/destination, number of passengers etc. You only verify if your class passes correct messages to collaborators.
+  */
   @Test
   public void searchBcnToMadWith1Ad2ChAnd2DaysAdvance()
   {
     Flights flights = search.execute(criteria);
 
+    // REV misleading assertion message
     assertThat("The flights are equals", flights, equalTo(FlightsFixture.BCN_MAD_WITH_1AD_2CH_2DAYS));
   }
 
+  // REV Typo
   @Before
   public void inicialize()
   {

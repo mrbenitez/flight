@@ -2,6 +2,12 @@ package com.flights.domain.model;
 
 import java.util.Date;
 
+// REV Responsibility
+/*
+This class has many responsibilities:
+- it represents a scheduled flight (i.e. a flight in the timetable)
+- it stores the final price for a search
+ */
 public class Flight
 {
   private Route route;
@@ -71,6 +77,10 @@ public class Flight
         + ", airline=" + airline + "]";
   }
 
+  // Java 7/8
+  /*
+  Use java.util.Objects for generating equals/hashCode.
+   */
   @Override
   public int hashCode()
   {
@@ -182,6 +192,10 @@ public class Flight
     return true;
   }
 
+  // REV patterns
+  /*
+  This builder implementation does the same as the private Flight constructor.
+   */
   public static class Builder
   {
     private Route route;

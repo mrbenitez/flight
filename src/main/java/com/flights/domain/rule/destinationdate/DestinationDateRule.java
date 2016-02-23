@@ -7,6 +7,10 @@ import java.util.GregorianCalendar;
 import com.flights.DateUtil;
 import com.flights.domain.model.Price;
 
+// REV naming
+/*
+Class name prefixed with the package name.
+ */
 public class DestinationDateRule
 {
   private static final double PERCENTAGE_MORE_30_DAYS_ADVANCE = 0.8;
@@ -14,6 +18,10 @@ public class DestinationDateRule
   private static final double PERCENTAGE_BETWEEN_3_15_DAYS_ADVANCE = 1.2;
   private static final double PERCENTAGE_LESS_3_DAYS_ADVANCE = 1.5;
 
+  // REV Java 8
+  /*
+  Use Java 8 java.time API. It gives you control over time.
+   */
   public Price calculatePrice(Date destinationDate, Price basePrice)
   {
     int diffDays = calculateDaysAdvance(destinationDate);

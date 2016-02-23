@@ -11,6 +11,8 @@ import com.flights.domain.rule.destinationdate.DestinationDateRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRule;
 import com.flights.domain.rule.passengertype.PassengerTypeRuleFactory;
 
+// REV Naming
+// REV Typos
 public class CalculatePricesFlight
 {
   private PassengerTypeRuleFactory passengerTypeRuleFactory;
@@ -23,6 +25,13 @@ public class CalculatePricesFlight
     this.destinationDateRule = destinationDateRule;
   }
 
+  // REV Hard to follow algorithm.
+  /*
+   First, you calculate the price based on departure date for a generic passenger.
+   Then you loop through passenger types and for each passenger type you calculate the total price for this pax group.
+   The input price is the previously calculated departure date price EXCEPT for infants.
+   Then you apply the rule depending on the passenger type.
+   */
   public Price calculate(SearchCriteria criteria, Flight flight)
   {
     Price departureDatePrice = destinationDateRule.calculatePrice(criteria.getDepartureDate(),
@@ -60,6 +69,10 @@ public class CalculatePricesFlight
     return basePrice;
   }
 
+  // REV Misplaced responsibility
+  /*
+  Flight object could be responsible for calculating the base price.
+   */
   private Price basePriceWhenIsInfant(Flight flight, PassengerType passangerType, Price basePrice)
   {
     if (PassengerType.INFANT.equals(passangerType))

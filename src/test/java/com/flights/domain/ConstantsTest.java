@@ -2,6 +2,10 @@ package com.flights.domain;
 
 import com.flights.domain.model.Price;
 
+// REV Naming
+/*
+Does this class tests some constants? Or is a fixture for prices?
+ */
 public class ConstantsTest
 {
   public static final Price BCN_MAD_IB_BASE_PRICE = new Price(259.0);

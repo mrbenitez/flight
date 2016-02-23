@@ -3,6 +3,14 @@ package com.flights;
 import java.util.Calendar;
 import java.util.Date;
 
+// REV Encapsulation
+/*
+Create your own domain type representing dates.
+ */
+// REV Java 8 features
+/*
+Use java.time API.
+ */
 public class DateUtil
 {
   public static Date obtainDateWithDaysAdvance(int daysAdvance)

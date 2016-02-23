@@ -8,6 +8,10 @@ import com.flights.domain.model.Price;
 
 public class InfantPriceFinder
 {
+  // REV Naming
+  /*
+  Hungarian notation. Don't encode the variable type in the variable name.
+   */
   private static Map<Airline, Double> infantPriceMap = new HashMap<>();
 
   static

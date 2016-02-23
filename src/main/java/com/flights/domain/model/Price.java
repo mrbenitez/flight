@@ -2,6 +2,10 @@ package com.flights.domain.model;
 
 public class Price
 {
+  // REV correctness
+  /*
+  Don't store the price as double.
+   */
   private Double value;
 
   public Price(Double value)

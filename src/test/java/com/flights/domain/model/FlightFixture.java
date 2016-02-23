@@ -26,6 +26,10 @@ import com.flights.repository.provider.InfantPriceFinder;
 
 public class FlightFixture
 {
+  // REV Naming
+  /*
+  There is no concept like flight provider in the domain.
+   */
   public static final Flight BCN_MAD_IB_2DAYS = createFlightProvider(BCN,
                                                                      MAD,
                                                                      BCN_MAD_IB_BASE_PRICE,

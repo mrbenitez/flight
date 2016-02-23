@@ -7,6 +7,10 @@ public class Flights
 {
   private List<Flight> flights = new ArrayList<Flight>();
 
+  // REV information hiding
+  /*
+  You return flights that can be modified from outside. Return an immutable list.
+   */
   public List<Flight> getFlights()
   {
     return flights;

@@ -7,6 +7,10 @@ import com.flights.repository.provider.SearchFlightsAdapter;
 
 public class SearchFlightsAvailable
 {
+  // REV Dependency inversion
+  /*
+  Code to interfaces.
+   */
   private SearchFlightsAdapter searchFlightsAdapter;
   private CalculatePricesFlight calculatePricesFlight;
 

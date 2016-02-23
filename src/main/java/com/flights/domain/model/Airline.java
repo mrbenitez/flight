@@ -8,6 +8,10 @@ public enum Airline
   IB("IB", "Iberia"), BA("BA", "British Airways"), LH("LH", "Lufthansa"), FR("FR", "Ryanair"), VY("VY",
       "Vueling"), TK("TK", "Turkish Airlines"), U2("U2", "Easyjet");
   private static final Map<String, Airline> AIRLINE_MAP = new HashMap<>();
+  // REV Duplication
+  /*
+  Enum value is already a code.
+   */
   private String code;
   private String name;
 

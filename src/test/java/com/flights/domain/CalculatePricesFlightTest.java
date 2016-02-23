@@ -30,6 +30,10 @@ public class CalculatePricesFlightTest
   private Price adultTotalPrice = new Price(355.2);
   private Price childTotalPrice = new Price(118.99);
   private Price infantTotalPrice = new Price(7.0);
+  // REV Overmocking
+  /*
+  Five mocks indicates that the class has too many collaborators.
+   */
   @Mock
   private PassengerTypeRule adultRule;
   @Mock

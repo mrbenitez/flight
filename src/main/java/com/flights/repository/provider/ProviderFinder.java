@@ -13,6 +13,10 @@ import com.flights.domain.model.Price;
 import com.flights.domain.model.Route;
 import com.flights.domain.model.SearchCriteria;
 
+// REV naming
+/*
+There is no provider concept in the domain.
+ */
 public class ProviderFinder
 {
   private static final String DELIM = ",";
@@ -25,6 +29,14 @@ public class ProviderFinder
     BufferedReader br;
     try
     {
+      // REV Java 8
+      /*
+      Almost a one-liner with Java 8 :)
+       */
+      // REV IO issues
+      /*
+      Always close the reader
+       */
       br = new BufferedReader(new FileReader(fileName));
       StringTokenizer st = null;
       boolean firstLine = true;
@@ -64,6 +76,10 @@ public class ProviderFinder
     Price basePrice = new Price(Double.valueOf(priceBase.trim()));
     String airlineCode = flightCode.substring(0, 2);
     Airline airline = Airline.getAirline(airlineCode);
+    // REV coupling
+    /*
+    Hard-wired dependency to a global method.
+     */
     Price infantPrice = InfantPriceFinder.obtainPrice(airline);
     Flight.Builder builder = new Flight.Builder(route, criteria.getDepartureDate(), flightCode,
         basePrice, infantPrice, airline.getName());

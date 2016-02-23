@@ -9,6 +9,10 @@ public enum Airport
       "Frakfurt"), IST("IST", "Istanbul"), AMS("AMS", "Amsterdam"), FCO("FCO", "Rome"), CPH("CPH",
           "Copenhagen"), XXX("XXX", "Unknow");
   private static final Map<String, Airport> AIRPORT_MAP = new HashMap<>();
+  // REV Duplication
+  /*
+  Enum value is already a code.
+   */
   private String iata;
   private String name;
 
